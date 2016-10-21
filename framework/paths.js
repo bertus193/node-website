@@ -1,16 +1,26 @@
 var bp = require('body-parser')
-var express = require('express')
-var app = express()
 
+var framework = require('./framework')
+var app = framework.app
 
+var lista = new Map()
+lista.set(1, {id:1, nombre:"patatas", cantidad:"1 bolsa"})
+lista.set(2, {id:2, nombre:"whisky",cantidad:"2 botellas"})
+var idActual = 3;
+
+app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
 
-app.get('/api/items', function(pet, resp){
-	var array = [];
-	lista.forEach(function(valor){
-		array.push(valor)
-	})
-	resp.send(array)
+app.get('/login', function(req, res) {
+   res.sendfile('views/login.html', {root: __dirname })
+});
+
+app.post('/checkLogin', function(pet, resp) {
+	resp.send(pet.body.user)
+})
+
+app.get('/checkLogin', function(pet, resp) {
+	resp.redirect("/login")
 })
 
 app.get('/api/items/:id', function(pet,resp){

@@ -1,10 +1,14 @@
+var express = require('express')
+
 var framework = {
+  app : express(),
+  
   getAuth: function() {
       return auth = require('./auth');
   },
   
   getPaths(){
-    return require('./paths')
+    return require('./paths');
   }
 }
  
