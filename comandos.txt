@@ -1,0 +1,8 @@
+killall -9 node
+
+
+MYSQL PASS VACIA
+
+mysqldump -u root -p adi > archivo.sql 
+
+npm install x
