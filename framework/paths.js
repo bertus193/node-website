@@ -16,12 +16,22 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/checkLogin', function(pet, resp) {
-	resp.send(pet.body.user)
+	var salida = framework.getAuth().login(pet.body.user,pet.body.password)
+	resp.send(salida);
 })
 
 app.get('/checkLogin', function(pet, resp) {
 	resp.redirect("/login")
 })
+
+app.get('/restringido', function(pet, resp) {
+		if(framework.getAuth().getSession())
+        resp.send("OK, tienes permiso");
+    else {
+        resp.status(401);
+        resp.send("Debes autentificarte");
+    }
+});
 
 app.get('/api/items/:id', function(pet,resp){
 	var id = parseInt(pet.params.id)
