@@ -5,6 +5,8 @@ Comandos:
 killall -9 node
 
 
+mysql -u root
+
 MYSQL PASS VACIA
 
 mysqldump -u root -p adi > archivo.sql 

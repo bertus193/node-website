@@ -7,6 +7,10 @@ var framework = {
       return auth = require('./auth');
   },
   
+  getMysql(){
+    return require('./mysql');
+  },
+  
   getPaths(){
     return require('./paths');
   }
