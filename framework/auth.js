@@ -19,11 +19,20 @@ var auth = {
       }
   },
   
-  getSession(){
-        console.log(session.token)
-        if (session.token)
-          return true
+  validateSession(){      
+        if (session.token){
+          var token1 = session.token.split('.')[0]
+          var token2 = this.getValidationToken().split('.')[0];
+          console.log(token1)
+          console.log(token2)
+          if(token1 == token2)
+            return true
+            return false
+        }
+        else{
           return false
+        }
+          
   },
  
   validate(username, password) {

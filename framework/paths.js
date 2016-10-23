@@ -25,7 +25,7 @@ app.get('/checkLogin', function(pet, resp) {
 })
 
 app.get('/restringido', function(pet, resp) {
-		if(framework.getAuth().getSession())
+		if(framework.getAuth().validateSession())
         resp.send("OK, tienes permiso");
     else {
         resp.status(401);
