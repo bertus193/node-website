@@ -13,7 +13,12 @@ var framework = {
   
   getPaths(){
     return require('./paths');
+  },
+  
+  getImages(){
+    return require('./images');
   }
+  
 }
  
 module.exports = framework;

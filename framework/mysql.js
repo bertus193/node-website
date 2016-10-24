@@ -1,5 +1,4 @@
 var mysql = require("mysql");
-
 var framework = require('./framework')
 
 var mysql = {
@@ -30,7 +29,6 @@ var mysql = {
   getCon(){
     return con;
   }
-}
 }
  
 module.exports = mysql;

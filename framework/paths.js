@@ -1,4 +1,7 @@
 var bp = require('body-parser')
+var multipart = require('connect-multiparty');
+var fs = require('fs');
+var path = require('path')
 
 var framework = require('./framework')
 var app = framework.app
@@ -68,27 +71,33 @@ app.get('/api/items/:id', function(pet,resp){
 
 //para probar con curl
 //curl -d '{"nombre":"tomates","cantidad":1}' -H "Content-Type:application/json" -v http://localhost:3000/api/items
-app.post('/api/items', function(pet, resp) {
-   var nuevo = pet.body
-   if (nuevo.nombre && nuevo.cantidad) {
-     var creado = {id: idActual, nombre:nuevo.nombre, cantidad: nuevo.cantidad}
-	 lista.set(idActual,creado)
-	 idActual++
-	 resp.status(201)
-	 //Fundamentalismo REST
-	 resp.header('Location','http://localhost:3000/api/items/'+creado.id) 
-	 //En la práctica muchos APIs devuelven el objeto creado, incluyendo id
-	 resp.send(creado)    
-   }
-   else {
-   	 resp.status(400)
-   	 resp.send("el objeto no tiene los campos adecuados")
-   }
+
+app.get('/images/upload', function(pet, res){
+		res.sendFile('views/uploadImage.html', {root: __dirname })
+})
+	
+app.post('/images/upload', multipart(), function(req, resp) {
+	var tempPath = req.files.image.path;
+  var targetPath = path.resolve('./images/'+req.files.image.name);
+	
+  if (path.extname(req.files.image.name).toLowerCase() === '.png') {
+        fs.rename(tempPath, targetPath, function(err) {
+            if (err) throw err;
+            console.log("Upload completed!");
+						resp.send(req.files.image.name);
+        });
+  } 
+	else {
+        fs.unlink(tempPath, function () {
+            if (err) throw err;
+            console.error("Only .png files are allowed!");
+        });
+  }
 })
 
 //Podéis probar esto con
 //curl -X DELETE -v http://localhost:3000/api/items/1
-app.delete('/api/items/:id', function(pet, resp){
+app.delete('/images/:enlace', function(pet, resp){
 	var id = parseInt(pet.params.id)
 	if (isNaN(id)) {
 		resp.status(400);

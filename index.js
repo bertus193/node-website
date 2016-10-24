@@ -1,7 +1,7 @@
 var framework = require('./framework/framework')
 
 
-console.log(framework.getAuth().getValidationToken())
+console.log(framework.getImages().generate(3))
 
 framework.getMysql().connect();
 
