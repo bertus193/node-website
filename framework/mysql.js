@@ -14,10 +14,10 @@ var mysql = {
         console.log('Error connecting to Db');
         return;
       }
+      
       console.log('Connection established');
     });
-
-
+    this.con.query("use hostimg;");
   },
   
   end(){
@@ -27,7 +27,7 @@ var mysql = {
   },
   
   getCon(){
-    return con;
+    return this.con;
   }
 }
  

@@ -49,24 +49,12 @@ app.get('/restringido', function(pet, resp) {
 
 
 
-
-
-
-app.get('/api/items/:id', function(pet,resp){
-	var id = parseInt(pet.params.id)
-	if (isNaN(id)) {
-		resp.status(400);
-		resp.end();
-	}
-	else {
-		var item = lista.get(id)
-		if (item==undefined) {
-			resp.status(404)
-			resp.send('No existe el item con id ' + id);
-		}
-		else
-			resp.send(item);
-	}
+app.get('/images/:enlace', function(pet,resp){
+		var prueba = "";
+		framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
+			console.log(rows);
+			resp.send(rows);
+		})
 })
 
 //para probar con curl

@@ -2,12 +2,12 @@ var framework = require('./framework');
 
 var images = {
   
-  getImageByLink(link) {
+  getImageByLink : function(link, callback) {
     var con = framework.getMysql().getCon();
-    con.query('SELECT * FROM images WHERE enlace = '+link+ " LIMIT 1",function(err,rows){
-      if(err) throw err;
-      
-      return rows;
+    con.query('SELECT * FROM imagenes WHERE enlace = "'+link+'" LIMIT 1',function(err,rows){
+      if(err) 
+        callback(err);
+        callback(undefined, rows);
     });
   },
   
