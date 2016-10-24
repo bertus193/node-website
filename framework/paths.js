@@ -50,10 +50,32 @@ app.get('/restringido', function(pet, resp) {
 
 
 app.get('/images/:enlace', function(pet,resp){
-		var prueba = "";
+		var fullUrl = '<img src="' + pet.protocol + '://' + pet.get('host') + '/images/lib';
 		framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
-			console.log(rows);
-			resp.send(rows);
+			if(!err){
+				var salida = fullUrl + rows[0].pathName + '"/>';
+				resp.send(salida);
+			}
+			else{
+				resp.send("Parece que ha habido un error");
+			}
+		})
+})
+
+app.get('/images/lib/:enlace', function(pet,resp){
+		var imageDir = './images/lib/';
+		var fullUrl = pet.protocol + '://' + pet.get('host') + pet.originalUrl;		
+		var lastSegment = fullUrl.split('/').pop();
+	
+		fs.readFile(imageDir + lastSegment, function (err, content) {
+            if (err) {
+                resp.writeHead(400, {'Content-type':'text/html'})
+                resp.end("No such image");    
+            } else {
+                //specify the content type in the response will be an image
+                resp.writeHead(200,{'Content-type':'image/jpg'});
+                resp.end(content);
+            }
 		})
 })
 
