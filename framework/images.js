@@ -11,15 +11,15 @@ var images = {
     });
   },
   
-  newImage(nombre, autor, pathName){
-    var enlace = generate(5);
+  newImage(nombre, autor, enlace, pathName){
     
     var con = framework.getMysql().getCon();
-    con.query("INSERT INTO `imagenes` (nombre`, `enlace`, `autor`, `pathName`) VALUES ('"+nombre+"', '"+enlace+"', '"+autor+"', "+pathName+");");
-    
+    con.query("INSERT INTO `imagenes` (`nombre`, `enlace`, `autor`, `pathName`) VALUES ('"+nombre+"', '"+enlace+"', '"+autor+"', '"+pathName+"');");
+    console.log("Upload completed!");
+    return enlace;
   },
   
-  generate(count) {
+  generateImageName(count) {
     var _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     var str = '';
 

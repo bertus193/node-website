@@ -39,8 +39,8 @@ var auth = {
     return token = jwt.encode(payload, password);
   },
   
-  getTokenInfo(){
-      return decoded = jwt.decode(session.token, this.password);
+  getTokenInfo(token, password){
+      return decoded = jwt.decode(token, password);
   }
   
   

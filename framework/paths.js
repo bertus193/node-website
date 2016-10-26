@@ -50,17 +50,43 @@ app.get('/restringido', function(pet, resp) {
     }
 });
 
-
+app.get('/images/upload', function(pet, res){
+		res.sendFile('views/uploadImage.html', {root: __dirname })
+})
+	
+app.post('/images/upload', multipart(), function(req, resp) {
+	var tempPath = req.files.image.path;
+	var enlace = framework.getImages().generateImageName(5);
+	var imageName = enlace + "_" + req.files.image.name;
+  var targetPath = path.resolve('./images/lib/'+imageName);
+	
+  if (path.extname(req.files.image.name).toLowerCase() === '.png') {
+        fs.rename(tempPath, targetPath, function(err) {
+            if (err) throw err;
+            framework.getImages().newImage("Alberto","Alberto", enlace, imageName);
+						resp.send(req.files.image.name);
+        });
+  } 
+	else {
+        fs.unlink(tempPath, function () {
+            resp.send("Only .png files are allowed!");
+        });
+  }
+})
 
 app.get('/images/:enlace', function(pet,resp){
-		var fullUrl = '<img src="' + pet.protocol + '://' + pet.get('host') + '/images/lib/';
+		
 		framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
-			if(!err){
-				var salida = fullUrl + rows[0].pathName + '"/>';
-				resp.send(salida);
+			if(err){
+				resp.send("Parece que ha habido un error");
+			}
+			else if(rows.length == 0){
+				resp.send("no existe dicha imagen");
 			}
 			else{
-				resp.send("Parece que ha habido un error");
+				var fullUrl = '<img src="' + pet.protocol + '://' + pet.get('host') + '/images/lib/';
+				var salida = fullUrl + rows[0].pathName + '"/>';
+				resp.send(salida);
 			}
 		})
 })
@@ -85,28 +111,7 @@ app.get('/images/lib/:enlace', function(pet,resp){
 //para probar con curl
 //curl -d '{"nombre":"tomates","cantidad":1}' -H "Content-Type:application/json" -v http://localhost:3000/api/items
 
-app.get('/images/upload', function(pet, res){
-		res.sendFile('views/uploadImage.html', {root: __dirname })
-})
-	
-app.post('/images/upload', multipart(), function(req, resp) {
-	var tempPath = req.files.image.path;
-  var targetPath = path.resolve('./images/'+req.files.image.name);
-	
-  if (path.extname(req.files.image.name).toLowerCase() === '.png') {
-        fs.rename(tempPath, targetPath, function(err) {
-            if (err) throw err;
-            console.log("Upload completed!");
-						resp.send(req.files.image.name);
-        });
-  } 
-	else {
-        fs.unlink(tempPath, function () {
-            if (err) throw err;
-            console.error("Only .png files are allowed!");
-        });
-  }
-})
+
 
 //Podéis probar esto con
 //curl -X DELETE -v http://localhost:3000/api/items/1
