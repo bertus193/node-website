@@ -19,8 +19,11 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/checkLogin', function(pet, resp) {
-	var salida = framework.getAuth().login(pet.body.user,pet.body.password)
-	resp.send(salida);
+	framework.getAuth().login(pet.body.user, pet.body.password, function(err, rows){
+		if(err)
+			resp.send(err)
+			resp.send(rows)
+	})
 })
 
 app.get('/checkLogin', function(pet, resp) {
@@ -50,7 +53,7 @@ app.get('/restringido', function(pet, resp) {
 
 
 app.get('/images/:enlace', function(pet,resp){
-		var fullUrl = '<img src="' + pet.protocol + '://' + pet.get('host') + '/images/lib';
+		var fullUrl = '<img src="' + pet.protocol + '://' + pet.get('host') + '/images/lib/';
 		framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
 			if(!err){
 				var salida = fullUrl + rows[0].pathName + '"/>';

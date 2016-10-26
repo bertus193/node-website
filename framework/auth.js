@@ -1,6 +1,6 @@
 var jwt = require('jwt-simple');
 var moment = require('moment');
-var session = require('express-session');
+//var session = require('express-session');
 
 var framework = require('./framework')
 
@@ -8,44 +8,27 @@ var auth = {
   username : 'root',
   password: '123456',
   
-  login: function(username, password) {
-      if(this.validate(username, password)){
-          var token = this.getValidationToken();
-          session.token = token;
-        return true
-      }
-      else{
-        return false
-      }
+  login: function(username, password, callback) {
+      var con = framework.getMysql().getCon();
+      con.query('SELECT * FROM usuarios WHERE username = "'+username+'" && password = "'+password+'" LIMIT 1',function(err,rows){
+        if(err){ 
+          callback(err);
+        }else{
+          if(rows.length == 0){
+            callback(undefined, false);
+          }
+          else{
+            var token = framework.getAuth().generateToken(username, password);
+            framework.getAuth().updateToken(username,token);
+            callback(undefined, token);
+          }
+        }
+      });
   },
   
-  validateSession(){      
-        if (session.token){
-          var token1 = session.token.split('.')[0]
-          var token2 = this.getValidationToken().split('.')[0];
-          console.log(token1)
-          console.log(token2)
-          if(token1 == token2)
-            return true
-            return false
-        }
-        else{
-          return false
-        }
-          
-  },
- 
-  validate(username, password) {
-    if(this.username == username && this.password == password){
-      return true;
-    }
-    else{
-      return false;
-    }
-  },
-  
-  getValidationToken(){
-    return this.generateToken(this.username, this.password);
+  updateToken(username, token){
+    var con = framework.getMysql().getCon();
+    con.query('UPDATE usuarios set token = "'+token+'" WHERE username = "'+username+'"');
   },
   
   generateToken(username, password){
@@ -59,6 +42,8 @@ var auth = {
   getTokenInfo(){
       return decoded = jwt.decode(session.token, this.password);
   }
+  
+  
   
   
   
