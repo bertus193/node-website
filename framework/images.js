@@ -19,6 +19,19 @@ var images = {
     return enlace;
   },
   
+  deleteImage(enlace, callback){
+    var con = framework.getMysql().getCon();
+    con.query('DELETE FROM imagenes WHERE enlace = "'+enlace+'"',function(err,rows){
+      if(err) {
+        callback(err);
+      }
+      else{
+        framework.fs.unlinkSync('./images/lib/' + enlace + ".png"); 
+        callback(undefined, rows.affectedRows);
+      }    
+    });
+  },
+  
   generateImageName(count) {
     var _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     var str = '';

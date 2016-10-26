@@ -1,10 +1,11 @@
 var bp = require('body-parser')
 var multipart = require('connect-multiparty');
-var fs = require('fs');
 var path = require('path')
 
 var framework = require('./framework')
-var app = framework.app
+
+var app = framework.app;
+var fs = framework.fs;
 
 var lista = new Map()
 lista.set(1, {id:1, nombre:"patatas", cantidad:"1 bolsa"})
@@ -57,7 +58,7 @@ app.get('/images/upload', function(pet, res){
 app.post('/images/upload', multipart(), function(req, resp) {
 	var tempPath = req.files.image.path;
 	var enlace = framework.getImages().generateImageName(5);
-	var imageName = enlace + "_" + req.files.image.name;
+	var imageName = enlace + ".png";
   var targetPath = path.resolve('./images/lib/'+imageName);
 	
   if (path.extname(req.files.image.name).toLowerCase() === '.png') {
@@ -101,38 +102,25 @@ app.get('/images/lib/:enlace', function(pet,resp){
                 resp.writeHead(400, {'Content-type':'text/html'})
                 resp.end("No such image");    
             } else {
-                //specify the content type in the response will be an image
                 resp.writeHead(200,{'Content-type':'image/jpg'});
                 resp.end(content);
             }
 		})
 })
 
-//para probar con curl
-//curl -d '{"nombre":"tomates","cantidad":1}' -H "Content-Type:application/json" -v http://localhost:3000/api/items
-
-
-
-//Podéis probar esto con
-//curl -X DELETE -v http://localhost:3000/api/items/1
-app.delete('/images/:enlace', function(pet, resp){
-	var id = parseInt(pet.params.id)
-	if (isNaN(id)) {
-		resp.status(400);
-		resp.end();
-	}
-	else {
-		var item = lista.get(id)
-		if (item==undefined) {
-			resp.status(404)
-			resp.send('No existe el item con id ' + id);
-		}
-		else{
-			lista.delete(id);
-			resp.end();
-		}
-	}
-})
+app.delete('/images/delete/:enlace', function(pet, resp){
+	framework.getImages().deleteImage(pet.params.enlace, function(err, result){
+			if(err){
+				resp.send("Parece que ha habido un error");
+			}
+			else if(result == 0){
+				resp.send("No se ha encontrado ninguna imagen");
+			}
+			else{
+				resp.send("imagen eliminada");
+			}
+	})
+}),
 
 app.get('*', function(pet, resp){
 	resp.send('Hola soy express que tal')
