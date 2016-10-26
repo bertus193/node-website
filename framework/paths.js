@@ -120,7 +120,11 @@ app.delete('/images/delete/:enlace', function(pet, resp){
 				resp.send("imagen eliminada");
 			}
 	})
-}),
+})
+	
+app.put('/images/edit/:enlace', function(pet, resp){
+	resp.send("Name: " + pet.query.nombre);
+})
 
 app.get('*', function(pet, resp){
 	resp.send('Hola soy express que tal')
