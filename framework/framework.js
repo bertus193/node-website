@@ -3,6 +3,7 @@ var express = require('express')
 var framework = {
   app : express(),
   fs : require('fs'),
+  path : require('path'),
   
   getAuth: function() {
       return auth = require('./auth');

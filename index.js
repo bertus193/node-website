@@ -8,3 +8,5 @@ app.listen(3000,function(){
 	console.log('Marchando el servidor...')
 
 })
+
+module.exports = app;

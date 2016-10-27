@@ -1,11 +1,12 @@
 var bp = require('body-parser')
 var multipart = require('connect-multiparty');
-var path = require('path')
+
 
 var framework = require('./framework')
 
 var app = framework.app;
 var fs = framework.fs;
+var path = framework.path;
 
 var lista = new Map()
 lista.set(1, {id:1, nombre:"patatas", cantidad:"1 bolsa"})
