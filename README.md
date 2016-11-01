@@ -9,7 +9,7 @@ mysql -u root
 
 MYSQL PASS VACIA
 
-mysqldump -u root -p adi > archivo.sql 
+mysqldump -u root hostimg > backup.sql 
 
 npm install x
 
