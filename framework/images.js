@@ -54,6 +54,17 @@ var images = {
         str += _sym[parseInt(Math.random() * (_sym.length))];
     }
     return str;
+},
+  
+updateImage(image, callback){
+    var id = image.id;
+    var nombre = image.nombre;
+    var con = framework.getMysql().getCon();
+    con.query('UPDATE imagenes SET nombre = "' + nombre + '" WHERE id = '+id+' LIMIT 1',function(err,rows){
+      if(err) 
+        callback(err);
+        callback(undefined, rows.affectedRows);
+    });    
 }
   
   

@@ -137,8 +137,19 @@ app.delete('/images/deleteLastImage', function(pet, resp){
 	})
 })
 	
-app.put('/images/edit/:enlace', function(pet, resp){
-	resp.send("Name: " + pet.query.nombre);
+app.put('/images/edit/', function(pet, resp){
+	var image = pet.body;
+	framework.getImages().updateImage(image, function(err, result){
+			if(err){
+				resp.send("Parece que ha habido un error");
+			}
+			else if(result == 0){
+				resp.send("No se ha encontrado ninguna imagen");
+			}
+			else{
+				resp.send("Datos de la imagen modificados");
+			}
+	})
 })
 
 app.get('*', function(pet, resp){

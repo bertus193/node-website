@@ -5,8 +5,6 @@ var moment = require('moment');
 var framework = require('./framework')
 
 var auth = {
-  username : 'root',
-  password: '123456',
   
   login: function(username, password, callback) {
       var con = framework.getMysql().getCon();
@@ -14,7 +12,7 @@ var auth = {
         if(err){ 
           callback(err);
         }else{
-          if(rows.length == 0){
+          if(rows.length === 0){
             callback(undefined, false);
           }
           else{
@@ -36,11 +34,11 @@ var auth = {
       login: username,
       exp: moment().add(7, 'days').valueOf()
     }
-    return token = jwt.encode(payload, password);
+    return jwt.encode(payload, password);
   },
   
   getTokenInfo(token, password){
-      return decoded = jwt.decode(token, password);
+      return jwt.decode(token, password);
   }
   
   
