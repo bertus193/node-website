@@ -25,11 +25,25 @@ var images = {
       if(err) {
         callback(err);
       }
+      else if(rows.affectedRows === 0){
+        callback(undefined, 0);
+      }
       else{
         framework.fs.unlinkSync('./images/lib/' + enlace + ".png"); 
         callback(undefined, rows.affectedRows);
       }    
     });
+  },
+  
+  deleteLastImage(callback){
+    var con = framework.getMysql().getCon();
+      
+    con.query('SELECT enlace FROM imagenes ORDER BY id DESC LIMIT 1',function(err,rows){
+      framework.getImages().deleteImage(rows[0].enlace, function(err, result){
+        callback(undefined, result);
+      });
+    });
+    
   },
   
   generateImageName(count) {

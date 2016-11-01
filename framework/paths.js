@@ -114,7 +114,21 @@ app.delete('/images/delete/:enlace', function(pet, resp){
 			if(err){
 				resp.send("Parece que ha habido un error");
 			}
-			else if(result == 0){
+			else if(result === 0){
+				resp.send("No se ha encontrado ninguna imagen");
+			}
+			else{
+				resp.send("imagen eliminada");
+			}
+	})
+})
+
+app.delete('/images/deleteLastImage', function(pet, resp){
+	framework.getImages().deleteLastImage(function(err, result){
+			if(err){
+				resp.send("Parece que ha habido un error");
+			}
+			else if(result === 0){
 				resp.send("No se ha encontrado ninguna imagen");
 			}
 			else{
