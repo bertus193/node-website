@@ -33,23 +33,17 @@ app.get('/checkLogin', function(pet, resp) {
 })
 
 app.get('/perfil', function(pet, resp) {
-		if(framework.getAuth().validateSession()){
-				resp.send(framework.getAuth().getTokenInfo())
-		}
-		else {
-    		resp.status(401);
-        resp.send("Debes autentificarte");
-    }
-});
+	  var token = pet.query.token;
+		framework.getAuth().validateSession(token, function(err, result){
+				if(result.length == 1){
+						resp.send("Hola " + result[0].username);
+				}
+				else {
+    				resp.status(401);
+    		    resp.send("Debes autentificarte");
+    		}
+		});
 
-app.get('/restringido', function(pet, resp) {
-		if(framework.getAuth().validateSession()){
-				
-		}
-		else {
-    		resp.status(401);
-        resp.send("Debes autentificarte");
-    }
 });
 
 app.get('/images/upload', function(pet, res){

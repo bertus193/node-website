@@ -39,9 +39,16 @@ var auth = {
   
   getTokenInfo(token, password){
       return jwt.decode(token, password);
+  },
+  
+  validateSession(token, callback){
+    var con = framework.getMysql().getCon();
+    con.query('SELECT username FROM usuarios WHERE token = "' + token + '" LIMIT 1',function(err,rows){
+      if(err) 
+        callback(err);
+        callback(undefined, rows);
+    });
   }
-  
-  
   
   
   
