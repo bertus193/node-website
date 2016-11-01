@@ -2,16 +2,17 @@ var app = require('../index');
 var supertest = require('supertest');
 var framework = require('../framework/framework')
 var path = framework.path
+var assert = require('assert');
 
 var tokenValido = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbiI6InJvb3QiLCJleHAiOjE0NzgwOTk3NjM3MTR9.LxJ5Mu_ANpairH3nrWdRYFqTS2XaHpkSf3WlgZLDMNg';
 
 var tokenNoValido = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbiI6InJvb3QiLCJleHAiOjE0NzgwOTk3NjM3MTR9.LxJ5Mu_ANpairH3nrWdRYFqTS2XaHpkSf3WlgZLDMNy';
 
 
-describe('prueba de la app web', function(){
+describe('Test Paths', function(){
   
     //TEST 1
-    it('/ devuelve el contenido adecuado', function(done){
+    it('Devuelve el contenido adecuado', function(done){
         supertest(app)
             .get('/')
             .expect(200)
@@ -76,4 +77,27 @@ describe('prueba de la app web', function(){
             .expect('Debes autentificarte')
             .expect(401, done);
     });
+  
+    //TEST 9
+    it('Login', function(done){
+        supertest(app)                    
+            .post('/checkLogin')
+            .send('user=alberto')
+            .send('password=123456')
+            .expect(function(res) {
+               assert(res.text.split('.')[0] == 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9');
+              })
+            .expect(200, done);
+    });
+  
+    //TEST 10
+    it('Subir imagen no valida', function(done){
+        supertest(app)                    
+            .post('/images/upload')
+            .attach('image', path.join(__dirname, 'x.jpg'))
+            .expect('Only .png files are allowed!')
+            .expect(200, done);
+    });
+  
+    
 });

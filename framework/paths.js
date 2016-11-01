@@ -21,10 +21,10 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/checkLogin', function(pet, resp) {
-	framework.getAuth().login(pet.body.user, pet.body.password, function(err, rows){
+	framework.getAuth().login(pet.body.user, pet.body.password, function(err, result){
 		if(err)
 			resp.send(err)
-			resp.send(rows)
+			resp.send(result)
 	})
 })
 
