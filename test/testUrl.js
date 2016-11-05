@@ -14,7 +14,7 @@ describe('Test Paths', function(){
     //TEST 1
     it('Devuelve el contenido adecuado', function(done){
         supertest(app)
-            .get('/')
+            .get('/e')
             .expect(200)
             .expect('Hola soy express que tal', done);
     });

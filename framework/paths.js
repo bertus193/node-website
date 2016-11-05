@@ -144,8 +144,55 @@ app.put('/images/edit/', function(pet, resp){
 	})
 })
 
-app.get('/', function(req, res) {
-   res.render('../views/home.ejs', {user: 'test' })
+app.get('/', function(req, res){
+
+    //set default variables
+    var pageSize = 2;
+    var currentPage = 1,
+        images = [],
+        imagesArrays = [], 
+        imagesList = [];
+
+    //genreate list of students
+
+	
+		framework.getImages().getLast10Images(function(err, result){
+			if(err){
+				resp.send("Parece que ha habido un error");
+			}
+			/*else if(result == 0){
+				resp.send("No se ha encontrado ninguna imagen");
+			}*/
+			else{
+					var totalImages = result.length;
+					var pageCount = totalImages/pageSize;
+					var url = req.protocol + '://' + req.get('host') + "/images/lib/";
+				  for (var i = 0; i < totalImages; i++) {
+        			images.push({name: '<img src="'+url+result[i].pathName+'"/>'});
+    			}
+
+					//split list into groups
+					while (images.length > 0) {
+							imagesArrays.push(images.splice(0, pageSize));
+					}
+
+					//set current page if specifed as get variable (eg: /?page=2)
+					if (typeof req.query.page !== 'undefined') {
+							currentPage = +req.query.page;
+					}
+
+					//show list of students from group
+					imagesList = imagesArrays[+currentPage - 1];
+
+					//render index.ejs view file
+					res.render('home', {
+							images: imagesList,
+							pageSize: pageSize,
+							pageCount: pageCount,
+							currentPage: currentPage
+					});
+			}
+	})
 });
 
 app.get('*', function(pet, resp){

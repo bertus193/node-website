@@ -65,6 +65,17 @@ updateImage(image, callback){
         callback(err);
         callback(undefined, rows.affectedRows);
     });    
+},
+  
+getLast10Images(callback){
+    var con = framework.getMysql().getCon();
+    var images = [];
+      
+    con.query('SELECT pathName FROM imagenes ORDER BY id DESC LIMIT 10',function(err,rows){
+      if(err) 
+        callback(err);
+        callback(undefined, rows);
+    });  
 }
   
   

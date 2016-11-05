@@ -1,4 +1,3 @@
-<!-- views/index.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -13,23 +12,41 @@
 <div class="container">
 
     <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+        <h1>Hostimg</h1>
+        Galería de imágenes
+        <ul class="list-group">  
+  <% images.forEach( function( image ) { %>
+      <li class="list-group-item"><%- image.name %></li>
+  <% }) %>
+</ul>
 
- <form action="checkLogin" method="post">
-<%- user %>
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="user" required>
-
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-
-
-   </br><br>
-
-    <button type="submit">Login</button>
-    <button type="button" class="cancelbtn">Cancel</button>
-
-</form>
+<% if (pageCount > 1) { %>  
+<ul class="pagination">  
+  <% if (currentPage > 1) { %>
+      <li><a href="/?page=1">&laquo;</a></li>
+  <% } %>
+  <% var i = 1;
+  if (currentPage > 5) {
+  i = +currentPage - 4;
+  } %>
+  <% if (i !== 1) { %>
+      <li class="disabled"><a href="#">...</a></li>
+  <% } %>
+  <% for (i; i<=pageCount; i++) { %>
+    <% if (currentPage == i) { %>
+        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+        <li><a href="/?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (+currentPage + 4)) { %>
+        <li class="disabled"><a href="#">...</a></li>
+    <% break; } %>
+  <% } %>
+  <% if (currentPage != pageCount) { %>
+      <li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+  <% } %>
+</ul>  
+<% } %> 
     </div>
 
 </div>
