@@ -16,3 +16,8 @@ npm install x
 git commit -am "message" // To commit changes
 
 git push origin master // Push your local changes to github
+
+
+##Tests
+
+mocha

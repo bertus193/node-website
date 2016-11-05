@@ -8,16 +8,14 @@ var app = framework.app;
 var fs = framework.fs;
 var path = framework.path;
 
-var lista = new Map()
-lista.set(1, {id:1, nombre:"patatas", cantidad:"1 bolsa"})
-lista.set(2, {id:2, nombre:"whisky",cantidad:"2 botellas"})
-var idActual = 3;
+//HTML CON PARAMETROS -> RENDER
+app.set('view engine', 'ejs');
 
 app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
 
 app.get('/login', function(req, res) {
-   res.sendFile('views/login.html', {root: __dirname })
+   res.render('../views/login.ejs', {user: 'test' })
 });
 
 app.post('/checkLogin', function(pet, resp) {
@@ -47,7 +45,7 @@ app.get('/perfil', function(pet, resp) {
 });
 
 app.get('/images/upload', function(pet, res){
-		res.sendFile('views/uploadImage.html', {root: __dirname })
+		 res.render('../views/uploadImage.ejs', {user: 'test' })
 })
 	
 app.post('/images/upload', multipart(), function(req, resp) {
@@ -145,6 +143,10 @@ app.put('/images/edit/', function(pet, resp){
 			}
 	})
 })
+
+app.get('/', function(req, res) {
+   res.render('../views/home.ejs', {user: 'test' })
+});
 
 app.get('*', function(pet, resp){
 	resp.send('Hola soy express que tal')
