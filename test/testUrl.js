@@ -15,8 +15,10 @@ describe('Test Paths', function(){
     it('Devuelve el contenido adecuado', function(done){
         supertest(app)
             .get('/e')
-            .expect(200)
-            .expect('Hola soy express que tal', done);
+            .expect(function(res) {
+               console.log(res.text);
+            })
+            .expect(200,done)
     });
   
     //TEST 2
@@ -32,7 +34,9 @@ describe('Test Paths', function(){
         supertest(app)
             .post('/images/upload/')
             .attach('image', path.join(__dirname, 'x.png'))
-            .expect('x.png')
+            .expect(function(res) {
+               assert(res.text.split(' ')[0] == 'x.png');
+              })
             .expect(200, done);
     });
   

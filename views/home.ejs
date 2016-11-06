@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>Hostimg</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <style>
@@ -12,7 +12,7 @@
 <div class="container">
 
     <div class="jumbotron text-center">
-        <h1>Hostimg</h1>
+        <h1><span class="fa fa-picture-o"></span> Hostimg</h1>
         Galería de imágenes
         <ul class="list-group">  
   <% images.forEach( function( image ) { %>
@@ -23,7 +23,7 @@
 <% if (pageCount > 1) { %>  
 <ul class="pagination">  
   <% if (currentPage > 1) { %>
-      <li><a href="/?page=1">&laquo;</a></li>
+      <!--<li><a href="/?page=1">&laquo;</a></li>-->
   <% } %>
   <% var i = 1;
   if (currentPage > 5) {
@@ -43,7 +43,7 @@
     <% break; } %>
   <% } %>
   <% if (currentPage != pageCount) { %>
-      <li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+      <!--<li><a href="/?page=<%= pageCount %>">&raquo;</a></li>-->
   <% } %>
 </ul>  
 <% } %> 

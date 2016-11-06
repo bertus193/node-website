@@ -58,7 +58,7 @@ app.post('/images/upload', multipart(), function(req, resp) {
         fs.rename(tempPath, targetPath, function(err) {
             if (err) throw err;
             framework.getImages().newImage("Alberto","Alberto", enlace, imageName);
-						resp.send(req.files.image.name);
+						resp.send(req.files.image.name + " enlace: " + enlace);
         });
   } 
 	else {
