@@ -23,7 +23,9 @@ Finalidad: Controlar todo respecto las imagenes.
 
 1.1.3 Mysql
 
-Finalidad: Control Base de datos.Finalidad
+Finalidad: Control Base de datos.
+
+<addr>Editar archivo mysql.js en framework con configuración local y utilizar backup.sql</addr>
 
 1.1.4 Paths
 
@@ -65,5 +67,3 @@ npm install x
 
 
 Tests: mocha
-
-Integración con Travis
