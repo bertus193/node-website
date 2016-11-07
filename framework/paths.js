@@ -196,7 +196,8 @@ app.get('/', function(req, res){
 });
 
 app.get('*', function(pet, resp){
-	resp.send('Hola soy express que tal')
+	resp.status(404);
+	resp.send('Hola soy express que tal');
 })
 
 module.exports = app;

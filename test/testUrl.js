@@ -4,19 +4,17 @@ var framework = require('../framework/framework')
 var path = framework.path
 var assert = require('assert');
 
-var tokenValido = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbiI6InJvb3QiLCJleHAiOjE0NzgwOTk3NjM3MTR9.LxJ5Mu_ANpairH3nrWdRYFqTS2XaHpkSf3WlgZLDMNg';
-
-var tokenNoValido = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbiI6InJvb3QiLCJleHAiOjE0NzgwOTk3NjM3MTR9.LxJ5Mu_ANpairH3nrWdRYFqTS2XaHpkSf3WlgZLDMNy';
-
 
 describe('Test Paths', function(){
+  
+  var token;
   
     //TEST 1
     it('Devuelve el contenido adecuado', function(done){
         supertest(app)
             .get('/')
             .expect(function(res) {
-               if(assert(res.text.indexOf('Hostimg') > -1));
+               assert(res.text.indexOf('Hostimg') > -1);
               })
             .expect(200,done)
     });
@@ -26,7 +24,7 @@ describe('Test Paths', function(){
         supertest(app)
             .get('/hola')
             .expect('Hola soy express que tal')
-            .expect(200, done);
+            .expect(404, done);
     });
 
     //TEST 3
@@ -67,30 +65,31 @@ describe('Test Paths', function(){
     });
   
     //TEST 7
-    it('Perfil con sesion iniciada', function(done){
-        supertest(app)                    
-            .get('/perfil?token='+tokenValido)
-            .expect('Hola root')
-            .expect(200, done);
-    });
-  
-    //TEST 8
     it('Perfil, token no valido', function(done){
         supertest(app)                    
-            .get('/perfil?token='+tokenNoValido)
+            .get('/perfil?token='+"12321")
             .expect('Debes autentificarte')
             .expect(401, done);
     });
   
-    //TEST 9
+    //TEST 8
     it('Login', function(done){
         supertest(app)                    
             .post('/checkLogin')
-            .send('user=alberto')
+            .send('user=root')
             .send('password=123456')
             .expect(function(res) {
                assert(res.text.split('.')[0] == 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9');
+               token = res.text;
               })
+            .expect(200, done);
+    });
+  
+    //TEST 8-9
+    it('Perfil con sesion iniciada', function(done){
+        supertest(app)                    
+            .get('/perfil?token='+token)
+            .expect('Hola root')
             .expect(200, done);
     });
   
