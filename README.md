@@ -65,3 +65,5 @@ npm install x
 
 
 Tests: mocha
+
+Integración con Travis
