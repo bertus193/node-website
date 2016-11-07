@@ -158,7 +158,7 @@ app.get('/', function(req, res){
 	
 		framework.getImages().getLast10Images(function(err, result){
 			if(err){
-				resp.send("Parece que ha habido un error");
+				res.send("Parece que ha habido un error");
 			}
 			/*else if(result == 0){
 				resp.send("No se ha encontrado ninguna imagen");

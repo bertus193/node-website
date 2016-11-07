@@ -1,12 +1,15 @@
 {                                                                                                                                                                                                                                         
-  "name": "Hostimg",                                                                                                                                                                                                                       
-  "version": "1.0.0",                                                                                                                                                                                                                     
-  "description": "Alojamiento Imagenes Hostimg",                                                                                                                                                                                                   
-  "main": "index.js",                                                                                                                                                                                                                     
-  "directories": {                                                                                                                                                                                                                        
-    "test": "test"                                                                                                                                                                                                                        
-  },                                                                                                                                                                                                                                      
-  "dependencies": {                                                                                                                                
+  "name": "Hostimg",  
+  
+  "version": "1.0.0",     
+  
+  "description": "Alojamiento Imagenes Hostimg",         
+  
+  "main": "index.js",   
+  
+  "directories": {                                                                                     
+    "test": "test"     },                                                                                                                                                                                                                                      
+  "dependencies": {
     "body-parser": "^1.15.2",  
     "connect-multiparty": "^2.0.0",       
     "ejs": "^2.5.2",       
