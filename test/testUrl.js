@@ -14,10 +14,10 @@ describe('Test Paths', function(){
     //TEST 1
     it('Devuelve el contenido adecuado', function(done){
         supertest(app)
-            .get('/e')
+            .get('/')
             .expect(function(res) {
-               console.log(res.text);
-            })
+               if(assert(res.text.indexOf('Hostimg') > -1));
+              })
             .expect(200,done)
     });
   
