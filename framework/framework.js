@@ -4,6 +4,7 @@ var framework = {
   app : express(),
   fs : require('fs'),
   path : require('path'),
+  localStorage : require('localStorage'),
   
   getAuth: function() {
       return auth = require('./auth');

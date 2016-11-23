@@ -15,8 +15,9 @@ app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
 
 app.get('/login', function(req, res) {
-		var error = req.query.error;
-   res.render('../views/login.ejs', {error})
+	console.log(framework.localStorage.token);
+	var error = req.query.error;
+	res.render('../views/login.ejs', {error})
 });
 
 app.post('/checkLogin', function(pet, resp) {
@@ -25,8 +26,10 @@ app.post('/checkLogin', function(pet, resp) {
 			resp.redirect("/login?error=1")
 		else if(result == 2)
 			resp.redirect("/login?error=2")
-		else
-			resp.send(result);
+		else{
+			framework.localStorage.token = result;
+			resp.redirect("/")
+		}
 	})
 })
 
