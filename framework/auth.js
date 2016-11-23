@@ -13,7 +13,7 @@ var auth = {
           callback(err);
         }else{
           if(rows.length === 0){
-            callback(undefined, false);
+            callback(undefined, 2);
           }
           else{
             var token = framework.getAuth().generateToken(username, password);

@@ -1,10 +1,17 @@
-<!doctype html>
-<html>
 <% include header.ejs %>
-<body>
 
+<body>
 <div class="container">
    <div class="jumbotron text-center">
+      <% if(typeof error !== 'undefined' && error !== null){%>
+      <div class="alert alert-dismissible alert-danger">
+         <%if(error == 1){%>
+            Parece que ha habido algún error
+         <%}else if(error == 2){%>
+            Datos incorrectos
+         <%}%>
+      </div>
+      <%}%>
       <h1><span class="fa fa-lock"></span>Login</h1> 
       
       <div id="login"></div>
@@ -16,12 +23,12 @@
                <form action="checkLogin" method="post">
                   <label class="col-lg-2 control-label">Login</label>
                   <div class="col-lg-10">
-                  <input type="text" placeholder="Enter Username" name="user" required/><br></br>
+                  <input type="text" placeholder="Enter Username" name="user" /><br></br>
                   </div>
 
                   <label class="col-lg-2 control-label">Password</label>
                   <div class="col-lg-10">
-                  <input type="password" placeholder="Enter Password" name="password" required/>
+                  <input type="password" placeholder="Enter Password" name="password"/>
                   </div>
                   <br></br><br></br>
                   <button class="btn btn-primary" type="submit">Login</button>
