@@ -195,6 +195,10 @@ app.get('/', function(req, res){
 	})
 });
 
+app.get('/test', function(pet, res){
+		 res.render('../views/test.ejs', {})
+})
+
 app.get('*', function(pet, resp){
 	resp.status(404);
 	resp.send('Hola soy express que tal');

@@ -1,0 +1,88 @@
+<!--
+    Ejemplo de uso de componentes compuestos que además usan estado
+    una <Lista> está compuesta de <Item> y además cada item tiene un estado.
+    Todo el estado se almacena en el componente de nivel superior, es decir <Lista>
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
+    <style>
+        .tachado {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<!-- un div vacío en el que colocaremos el componente -->
+<div id="miComponente"></div>
+<!-- al usar JSX necesitamos cambiar el tipo del script, ya que no es Javascript -->
+<script type="text/babel">
+    //Definimos la clase del componente
+    var Item = React.createClass({
+        pulsado: function() {
+            this.props.handleClick(this.props.id)
+        },
+        render: function() {
+            if (this.props.vivo)
+                return <li onClick={this.pulsado}>{this.props.nombre}</li>
+            else
+                return <li onClick={this.pulsado} className="tachado">{this.props.nombre}</li>
+
+        }
+    })
+
+    var BarraBusqueda = React.createClass({
+       handleChange: function (evento) {
+         this.props.change(evento.target.value)
+       },
+       render: function () {
+           return <input type="search"
+                         placeholder="texto a buscar..."
+                         value={this.props.texto}
+                         onChange={this.handleChange} />
+       }
+    })
+
+    var Lista = React.createClass({
+        getInitialState: function () {
+          var vivos = new Array(this.props.nombres.length)
+          vivos.fill(true)
+          return {vivos: vivos, textoFiltro:''}
+        },
+        toggle: function(id) {
+          var vivosNew = this.state.vivos.slice()
+          vivosNew[id] = !vivosNew[id]
+          this.setState({vivos: vivosNew})
+        },
+        changeText: function (texto) {
+            this.setState({textoFiltro: texto})
+        },
+        render: function () {
+            var elementos = []
+            for(var i=0; i<this.props.nombres.length;i++) {
+                if (this.props.nombres[i].indexOf(this.state.textoFiltro)>-1) {
+                    elementos.push(<Item id={i}
+                                         key={i}
+                                         nombre={this.props.nombres[i]}
+                                         vivo={this.state.vivos[i]}
+                                         handleClick={this.toggle}/>)
+                }
+            }
+            return <div>
+                      <BarraBusqueda texto={this.state.textoFiltro} change={this.changeText}/>
+                      <ul> {elementos} </ul>
+                   </div>
+        }
+    })
+
+    //mostramos el componente
+    ReactDOM.render(
+            <Lista nombres={['Cersei Lannister', 'Eddard Stark', 'Jon Nieve']}/>,
+            document.getElementById('miComponente')
+    )
+</script>
+</body>
+</html>

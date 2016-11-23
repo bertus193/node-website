@@ -1,37 +1,50 @@
-<!-- views/index.ejs -->
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
+   <title>Node Authentication</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+   <meta charset="utf-8">
+   <script src="https://unpkg.com/react@15/dist/react.js"></script>
+   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
+   <style>
+      label{
+         margin-right:10px;
+      }
+   </style>
 </head>
 <body>
 <div class="container">
+   <div class="jumbotron text-center">
+      <h1><span class="fa fa-lock"></span>Node Authentication</h1>
+      
+      <div id="login"></div>
+      
+      <script type="text/babel">
+         var login = React.createClass({
+         render() {
+            return (
+               <form action="checkLogin" method="post">
+                  <label><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" name="user" required/><br></br>
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
-
- <form action="checkLogin" method="post">
-
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="user" required>
-
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-
-
-   </br><br>
-
-    <button type="submit">Login</button>
-    <button type="button" class="cancelbtn">Cancel</button>
-
-</form>
-    </div>
-
+                  <label><b>Password </b></label>
+                  <input type="password" placeholder="Enter Password" name="password" required/>
+                  <br></br><br></br>
+                  <button type="submit">Login</button>
+                  <button type="button" class="cancelbtn">Cancel</button>
+               </form>
+            );
+         }
+         })
+         //mostramos el componente
+         ReactDOM.render(
+            React.createElement(login),      //necesitamos una instancia
+            document.getElementById('login') //dónde lo queremos dibujar
+         )
+      </script>
+   </div>
 </div>
 </body>
 </html>
