@@ -1,23 +1,11 @@
 <!doctype html>
 <html>
-<head>
-   <title>Node Authentication</title>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
-   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-   <meta charset="utf-8">
-   <script src="https://unpkg.com/react@15/dist/react.js"></script>
-   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
-   <style>
-      label{
-         margin-right:10px;
-      }
-   </style>
-</head>
+<% include header.ejs %>
 <body>
+
 <div class="container">
    <div class="jumbotron text-center">
-      <h1><span class="fa fa-lock"></span>Node Authentication</h1>
+      <h1><span class="fa fa-lock"></span>Login</h1> 
       
       <div id="login"></div>
       
@@ -26,14 +14,17 @@
          render() {
             return (
                <form action="checkLogin" method="post">
-                  <label><b>Username</b></label>
+                  <label class="col-lg-2 control-label">Login</label>
+                  <div class="col-lg-10">
                   <input type="text" placeholder="Enter Username" name="user" required/><br></br>
+                  </div>
 
-                  <label><b>Password </b></label>
+                  <label class="col-lg-2 control-label">Password</label>
+                  <div class="col-lg-10">
                   <input type="password" placeholder="Enter Password" name="password" required/>
+                  </div>
                   <br></br><br></br>
-                  <button type="submit">Login</button>
-                  <button type="button" class="cancelbtn">Cancel</button>
+                  <button class="btn btn-primary" type="submit">Login</button>
                </form>
             );
          }
