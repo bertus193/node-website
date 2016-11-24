@@ -15,9 +15,12 @@ app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
 
 app.get('/login', function(req, res) {
-	console.log(framework.localStorage.token);
 	var error = req.query.error;
-	res.render('../views/login.ejs', {error})
+	var token = framework.localStorage.token;
+	framework.getAuth().validateSession(token, function(err, user){
+			var error = req.query.error;
+			res.render('../views/login.ejs', {error, user})
+	})
 });
 
 app.post('/checkLogin', function(pet, resp) {
@@ -28,24 +31,37 @@ app.post('/checkLogin', function(pet, resp) {
 			resp.redirect("/login?error=2")
 		else{
 			framework.localStorage.token = result;
-			resp.redirect("/")
+			resp.redirect("/perfil")
 		}
 	})
 })
+
+app.get('/logout', function(pet, resp) {
+	  var token = framework.localStorage.token;
+		framework.getAuth().validateSession(token, function(err, user){
+				if(user.length == 1){
+						 framework.localStorage.token = null;
+						resp.redirect("/login?logout")
+				}
+				else {
+    				resp.redirect("/login?error=3")
+    		}
+		});
+
+});
 
 app.get('/checkLogin', function(pet, resp) {
 	resp.redirect("/login")
 })
 
 app.get('/perfil', function(pet, resp) {
-	  var token = pet.query.token;
-		framework.getAuth().validateSession(token, function(err, result){
-				if(result.length == 1){
-						resp.send("Hola " + result[0].username);
+	  var token = framework.localStorage.token;
+		framework.getAuth().validateSession(token, function(err, user){
+				if(user.length == 1){
+						resp.render('../views/profile.ejs', {user})
 				}
 				else {
-    				resp.status(401);
-    		    resp.send("Debes autentificarte");
+    				resp.redirect("/login?error=3")
     		}
 		});
 
@@ -161,7 +177,11 @@ app.get('/', function(req, res){
         imagesList = [];
 
     //genreate list of students
-
+			var token = framework.localStorage.token;
+	framework.getAuth().validateSession(token, function(err, user){
+			if(err){
+				res.send("Parece que ha habido un error");
+			}
 	
 		framework.getImages().getLast10Images(function(err, result){
 			if(err){
@@ -196,10 +216,12 @@ app.get('/', function(req, res){
 							images: imagesList,
 							pageSize: pageSize,
 							pageCount: pageCount,
-							currentPage: currentPage
+							currentPage: currentPage,
+							user
 					});
 			}
 	})
+			})
 });
 
 app.get('/test', function(pet, res){
