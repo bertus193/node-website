@@ -11,7 +11,17 @@
         <h3>Galería de imágenes</h3>
         <ul class="list-group">  
   <% images.forEach( function( image ) { %>
-      <li class="list-group-item"><%- image.name %></li>
+      <li class="list-group-item"><%- image.name %>
+          <a href="#"></a><div class="buttonPagination btn btn-primary">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </div></a>
+          <a href="#"><div class="buttonPagination btn btn-primary" style="bottom: 45px;">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </div></a>
+          <a href="#"><div class="buttonPagination btn btn-primary" style="bottom: 90px;">
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </div></a>
+      </li>
   <% }) %>
 </ul>
 

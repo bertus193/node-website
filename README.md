@@ -42,22 +42,22 @@ Finalidad: Posee todas las rutas disponibles para el usuario iniciada o sin inic
 
 ## 3. Historias de usuario
 
-
+Historia de usuario 1:
 > La autentificación se realizará mediante la url /login (GET) que mostrará un formulario de acceso que enviará al usuario a /checkLogin (POST) cuya comprobación será:
  - Se genera un error en la base de datos: Error `Parece que ha habido algún error` y volverá a la pantalla de login.
  - El usuario no corresponde con ninguno de la base de datos: Error `Contraseña y/o login incorrectos` y volverá a la pantalla de login.
  - Todo es correcto: Guardará el token generado en `localStorage.token` y enviará al usuario a perfil.
 
----
+Historia de usuario 2:
 > Una vez se ha iniciado sesión se podrá ir al perfil desde el menú superior o pulsar cerrar sesión y salir en dicho menú.
 > Si se cierra sesión reenviará a el formulario de inicio de sesión mostrando un mensaje de Éxito: `Has cerrado sesión correctamente` sobreescribiendo `localStorage.token` a null.
 
----
+Historia de usuario 3:
 > Si se desea acceder a parte privada o a sitios inexistentes:
  - En caso de intentar acceder a Perfil **sin haber iniciado sesión**  o cualquier otra parte de la web no autorizada renviará a login indicando en un error `Necesitas iniciar sesión`
  - En caso de acceder a alguna parte de la web inexistente mostrará un aviso de error 404.
  
- ---
+Historia de usuario 4:
  > Si se desea ver la información de una imagen a detalle se deberá clickear la imagen o acceder desde la url `/images/URL-DE-IMAGEN`, una vez dentro:
  > - Si la imagen no existe: Mostrará un error `No existe dicha imagen`
  > - Si se accede a una imagen que ***sí*** existe mostrará la imagen y toda la información referente a dicha imagen.

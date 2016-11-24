@@ -107,6 +107,7 @@ app.get('/images/:enlace', function(pet,resp){
 })
 
 app.use('/images/web', framework.express.static('images/web'));
+app.use('/css', framework.express.static('css'));
 
 app.get('/images/lib/:enlace', function(pet,resp){
 		var imageDir = './images/lib/';

@@ -28,17 +28,17 @@
          render() {
             return (
                <form action="checkLogin" method="post">
-                  <label class="col-lg-2 control-label">Login</label>
-                  <div class="col-lg-10">
+                  <label className="control-label">Login</label>
+                  <div >
                   <input type="text" placeholder="Enter Username" name="user" /><br></br>
                   </div>
 
-                  <label class="col-lg-2 control-label">Password</label>
-                  <div class="col-lg-10">
+                  <label className="control-label">Password</label>
+                  <div >
                   <input type="password" placeholder="Enter Password" name="password"/>
                   </div>
                   <br></br><br></br>
-                  <button class="btn btn-primary" type="submit">Login</button>
+                  <button className="btn btn-primary" type="submit">Login</button>
                </form>
             );
          }
