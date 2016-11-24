@@ -11,14 +11,14 @@
         <h3>Galería de imágenes</h3>
         <ul class="list-group">  
   <% images.forEach( function( image ) { %>
-      <li class="list-group-item"><%- image.name %>
-          <a href="#"></a><div class="buttonPagination btn btn-primary">
+          <li class="list-group-item PaginationItem"><img src="/images/lib/<%- image.pathName %>"></img>
+          <a href="#"></a><div class="PaginationButtons btn btn-primary">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </div></a>
-          <a href="#"><div class="buttonPagination btn btn-primary" style="bottom: 45px;">
+          <a href="#"><div class="PaginationButtons btn btn-primary" style="bottom: 45px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </div></a>
-          <a href="#"><div class="buttonPagination btn btn-primary" style="bottom: 90px;">
+          <a href="/images/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary" style="bottom: 90px;">
               <i class="fa fa-arrow-right" aria-hidden="true"></i>
           </div></a>
       </li>

@@ -1,15 +1,12 @@
-.buttonPagination{
+.PaginationButtons{
   position: absolute; 
   bottom: 0; 
   right: 0;
-}
-
-.list-group-item{
-      min-height: 300px;
-}
-
-.buttonPagination{
   width: 50px;
+}
+
+.PaginationItem{
+      min-height: 300px;
 }
 
 .columnLeft{

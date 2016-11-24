@@ -184,7 +184,7 @@ app.get('/', function(req, res){
 				res.send("Parece que ha habido un error");
 			}
 	
-		framework.getImages().getLast10Images(function(err, result){
+		framework.getImages().getLast10Images(function(err, images){
 			if(err){
 				res.send("Parece que ha habido un error");
 			}
@@ -192,13 +192,9 @@ app.get('/', function(req, res){
 				resp.send("No se ha encontrado ninguna imagen");
 			}*/
 			else{
-					var totalImages = result.length;
+					var totalImages = images.length;
 					var pageCount = totalImages/pageSize;
 					var url = req.protocol + '://' + req.get('host') + "/images/lib/";
-				  for (var i = 0; i < totalImages; i++) {
-        			images.push({name: '<img src="'+url+result[i].pathName+'"/>'});
-    			}
-
 					//split list into groups
 					while (images.length > 0) {
 							imagesArrays.push(images.splice(0, pageSize));
