@@ -106,6 +106,8 @@ app.get('/images/:enlace', function(pet,resp){
 		})
 })
 
+app.use('/images/web', framework.express.static('images/web'));
+
 app.get('/images/lib/:enlace', function(pet,resp){
 		var imageDir = './images/lib/';
 		var fullUrl = pet.protocol + '://' + pet.get('host') + pet.originalUrl;		
@@ -226,9 +228,9 @@ app.get('/test', function(pet, res){
 		 res.render('../views/test.ejs', {})
 })
 
-app.get('*', function(pet, resp){
-	resp.status(404);
-	resp.send('Hola soy express que tal');
+app.get('*', function(pet, res){
+	res.status(404);
+	res.render('../views/404.ejs', {})
 })
 
 module.exports = app;
