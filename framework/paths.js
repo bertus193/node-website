@@ -91,18 +91,20 @@ app.post('/images/upload', multipart(), function(req, resp) {
 })
 
 app.get('/images/:enlace', function(pet,resp){
-		
-		framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
-			if(err){
-				resp.render('../views/viewImage.ejs', {msg : 1})
-			}
-			else if(rows.length == 0){
-				resp.render('../views/viewImage.ejs', {msg : 2})
-			}
-			else{
-				var urlImage = pet.protocol + '://' + pet.get('host') + '/images/lib/' + rows[0].pathName;
-				resp.render('../views/viewImage.ejs', {urlImage, rows})
-			}
+		var token = framework.localStorage.token;
+		framework.getAuth().validateSession(token, function(err, user){
+				framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
+					if(err){
+						resp.render('../views/viewImage.ejs', {msg : 1, user})
+					}
+					else if(rows.length == 0){
+						resp.render('../views/viewImage.ejs', {msg : 2, user})
+					}
+					else{
+						var urlImage = pet.protocol + '://' + pet.get('host') + '/images/lib/' + rows[0].pathName;
+						resp.render('../views/viewImage.ejs', {urlImage, rows, user})
+					}
+				})
 		})
 })
 

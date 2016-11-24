@@ -11,7 +11,7 @@
         <h3>Galería de imágenes</h3>
         <ul class="list-group">  
   <% images.forEach( function( image ) { %>
-          <li class="list-group-item PaginationItem"><img src="/images/lib/<%- image.pathName %>"></img>
+          <li class="list-group-item PaginationItem"><img class="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
           <a href="#"></a><div class="PaginationButtons btn btn-primary">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </div></a>
