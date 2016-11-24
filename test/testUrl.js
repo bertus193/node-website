@@ -23,7 +23,9 @@ describe('Test Paths', function(){
     it('La ruta /hola no existe', function(done){
         supertest(app)
             .get('/hola')
-            .expect('Hola soy express que tal')
+            .expect(function(res) {
+               assert(res.text.indexOf('<img src="/images/web/404.jpg">') > -1);
+              })
             .expect(404, done);
     });
 
@@ -67,9 +69,8 @@ describe('Test Paths', function(){
     //TEST 7
     it('Perfil, token no valido', function(done){
         supertest(app)                    
-            .get('/perfil?token='+"12321")
-            .expect('Debes autentificarte')
-            .expect(401, done);
+            .get('/perfil')
+            .expect('Found. Redirecting to /login?msg=3', done)
     });
   
     //TEST 8
@@ -78,18 +79,16 @@ describe('Test Paths', function(){
             .post('/checkLogin')
             .send('user=root')
             .send('password=123456')
-            .expect(function(res) {
-               assert(res.text.split('.')[0] == 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9');
-               token = res.text;
-              })
-            .expect(200, done);
+            .expect('Found. Redirecting to /perfil',done)
     });
   
     //TEST 8-9
     it('Perfil con sesion iniciada', function(done){
         supertest(app)                    
             .get('/perfil?token='+token)
-            .expect('Hola root')
+            .expect(function(res) {
+               assert(res.text.indexOf('<h3>¡Hola <strong>root</strong>!</h3>') > -1);
+              })
             .expect(200, done);
     });
   
