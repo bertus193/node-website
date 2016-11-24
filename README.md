@@ -24,15 +24,10 @@ Para hacer más entendible el codigo se ha utilizado un framework para repetir e
 ### Auth
 
 Finalidad: Controlar todo lo relacionado con los usuarios.
-  - El usuario que ha iniciado sesión subirá las imagenes a su nombre.
 
 ### Images
 
 Finalidad: Controlar todo respecto las imagenes.
-  - Portada: Las imagenes no superarán los 300px ni el 100% del ancho.
-  - Detalle de imagen: Las imagenes no superarán los 370px ni el 100% del ancho.
-  - Subir imagen: Solo se aceptará el formato PNG.
-  - Las imagenes por defecto serán anonimas al ser subidas, si se ha iniciado sesión serán del usuario.
 
 ### Mysql
 
@@ -70,7 +65,10 @@ Finalidad: Posee todas las rutas disponibles para el usuario iniciada o sin inic
  >> Accediendo a `/images/6lrjg` mostrará su nombre, autor, fecha ***en español*** y el número de *Me gusta*.
 
 *Historia de usuario 5*
-> 
+>  Para subir una foto deberá clickear en el menú superior a `Subir imágenes` donde le llevará a una pagina donde subir la imagen.
+>  - Si no se indica ninguna imagen mostrará el error `Debes seleccionar una imagen`.
+>  - Si el formato del archivo no es .PNG aparecerá el mensaje de error `Solo se puede utilizar el formato .png`.
+>  - Si se sube el archivo correctamente lo subirá como anónimo a no ser que se haya iniciado sesión y deirigirá a `/images/URL-DE-IMAGEN` mostrando el mensaje éxito  `¡Enhorabuena! la imagen ha sido subida correctamente`
 
 ## 4. Ejemplos de CRUD
 
