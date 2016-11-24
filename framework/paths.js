@@ -230,7 +230,10 @@ app.get('/test', function(pet, res){
 
 app.get('*', function(pet, res){
 	res.status(404);
-	res.render('../views/404.ejs', {})
+	var token = framework.localStorage.token;
+	framework.getAuth().validateSession(token, function(err, user){
+			res.render('../views/404.ejs', {user})
+	})
 })
 
 module.exports = app;
