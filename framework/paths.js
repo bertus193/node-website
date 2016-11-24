@@ -67,7 +67,11 @@ app.get('/perfil', function(pet, resp) {
 });
 
 app.get('/images/upload', function(pet, res){
-		 res.render('../views/uploadImage.ejs', {user: 'test' })
+		var msg = req.query.msg;
+		var token = framework.localStorage.token;
+		framework.getAuth().validateSession(token, function(err, user){
+				res.render('../views/uploadImage.ejs', {msg, user})
+		})
 })
 	
 app.post('/images/upload', multipart(), function(req, resp) {

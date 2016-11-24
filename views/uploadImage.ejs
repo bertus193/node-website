@@ -1,5 +1,25 @@
-<form action="/images/upload" method="POST" enctype="multipart/form-data">
-  Select an image to uploads:
-  <input type='file' name='image'/>
-  <input type="submit" value="Upload Image">
-</form>
+<% include header.ejs %>
+
+<body>
+<div class="container">
+  <div class="jumbotron text-center">
+   <% if(typeof msg !== 'undefined' && msg !== null){%>    
+         <%if(msg == 1){%>
+           <div class="alert alert-dismissible alert-danger">
+            Parece que ha habido algún error
+         <%}else if(msg == 2){%>
+           <div class="alert alert-dismissible alert-danger">
+            No existe dicha imagen
+         <%}%>
+           </div>  
+   <%}%>
+      <h1><i class="fa fa-cloud-upload" aria-hidden="true"></i> Subir imagen</h1><br></br>
+        <form action="/images/upload" method="POST" enctype="multipart/form-data">
+          <input class="btn btn-default" type='file' name='image'/><br></br>
+          <input class="btn btn-primary" type="submit" value="Subir imagen"></input>
+        </form>
+   </div>
+</div>
+</body>
+</html>
+

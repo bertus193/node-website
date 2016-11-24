@@ -2,6 +2,10 @@ img{
   max-width:100%;
 }
 
+input[type="file"]{
+  display: inline;
+}
+
 .PaginationButtons{
   position: absolute; 
   bottom: 0; 

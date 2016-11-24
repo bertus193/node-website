@@ -28,6 +28,9 @@ Finalidad: Controlar todo lo relacionado con los usuarios.
 ### Images
 
 Finalidad: Controlar todo respecto las imagenes.
+  - Portada: Las imagenes no superarán los 300px ni el 100% del ancho.
+  - Detalle de imagen: Las imagenes no superarán los 370px ni el 100% del ancho.
+  - Subir imagen: Solo se aceptará el formato PNG.
 
 ### Mysql
 
