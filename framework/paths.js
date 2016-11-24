@@ -66,7 +66,7 @@ app.get('/perfil', function(pet, resp) {
 
 });
 
-app.get('/images/upload', function(pet, res){
+app.get('/images/upload', function(req, res){
 		var msg = req.query.msg;
 		var token = framework.localStorage.token;
 		framework.getAuth().validateSession(token, function(err, user){
@@ -75,26 +75,30 @@ app.get('/images/upload', function(pet, res){
 })
 	
 app.post('/images/upload', multipart(), function(req, resp) {
+	var user = req.body.user;
 	var tempPath = req.files.image.path;
 	var enlace = framework.getImages().generateImageName(5);
 	var imageName = enlace + ".png";
   var targetPath = path.resolve('./images/lib/'+imageName);
-	
-  if (path.extname(req.files.image.name).toLowerCase() === '.png') {
+	if(req.files.image.name === ''){
+		resp.redirect("/images/upload?msg=1");
+	}	
+  else if (path.extname(req.files.image.name).toLowerCase() === '.png') {
         fs.rename(tempPath, targetPath, function(err) {
             if (err) throw err;
-            framework.getImages().newImage("Alberto","Alberto", enlace, imageName);
-						resp.send(req.files.image.name + " enlace: " + enlace);
+            framework.getImages().newImage("Nueva Imagen",user, enlace, imageName);
+						resp.redirect("/images/"+enlace+"?msg=3");
         });
   } 
 	else {
         fs.unlink(tempPath, function () {
-            resp.send("Only .png files are allowed!");
+            resp.redirect("/images/upload?msg=2");
         });
   }
 })
 
 app.get('/images/:enlace', function(pet,resp){
+		var msg = pet.query.msg;
 		var token = framework.localStorage.token;
 		framework.getAuth().validateSession(token, function(err, user){
 				framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
@@ -106,7 +110,7 @@ app.get('/images/:enlace', function(pet,resp){
 					}
 					else{
 						var urlImage = pet.protocol + '://' + pet.get('host') + '/images/lib/' + rows[0].pathName;
-						resp.render('../views/viewImage.ejs', {urlImage, rows, user})
+						resp.render('../views/viewImage.ejs', {urlImage, rows, user, msg})
 					}
 				})
 		})
@@ -122,8 +126,7 @@ app.get('/images/lib/:enlace', function(pet,resp){
 	
 		fs.readFile(imageDir + lastSegment, function (err, content) {
             if (err) {
-                resp.writeHead(400, {'Content-type':'text/html'})
-                resp.end("No such image");    
+                resp.redirect("/404");  
             } else {
                 resp.writeHead(200,{'Content-type':'image/jpg'});
                 resp.end(content);
@@ -231,12 +234,16 @@ app.get('/test', function(pet, res){
 		 res.render('../views/test.ejs', {})
 })
 
-app.get('*', function(pet, res){
+app.get('/404', function(pet, res){
 	res.status(404);
 	var token = framework.localStorage.token;
 	framework.getAuth().validateSession(token, function(err, user){
 			res.render('../views/404.ejs', {user})
 	})
+})
+
+app.get('*', function(pet, res){
+	res.redirect("/404");
 })
 
 module.exports = app;

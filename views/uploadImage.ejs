@@ -6,15 +6,21 @@
    <% if(typeof msg !== 'undefined' && msg !== null){%>    
          <%if(msg == 1){%>
            <div class="alert alert-dismissible alert-danger">
-            Parece que ha habido algún error
+              Debes seleccionar una imagen
          <%}else if(msg == 2){%>
            <div class="alert alert-dismissible alert-danger">
-            No existe dicha imagen
+              Solo se puede utilizar el formato .png
          <%}%>
            </div>  
    <%}%>
       <h1><i class="fa fa-cloud-upload" aria-hidden="true"></i> Subir imagen</h1><br></br>
         <form action="/images/upload" method="POST" enctype="multipart/form-data">
+          <% if(typeof user !== 'undefined' && user !== null && user.length == 1){%>
+             <input type="hidden" name="user" value="<%=user[0].username%>">
+          <%}else{%>
+            <input type="hidden" name="user" value="Anónimo">
+          <%}%>
+         
           <input class="btn btn-default" type='file' name='image'/><br></br>
           <input class="btn btn-primary" type="submit" value="Subir imagen"></input>
         </form>

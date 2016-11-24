@@ -15,7 +15,6 @@ var images = {
     
     var con = framework.getMysql().getCon();
     con.query("INSERT INTO `imagenes` (`nombre`, `enlace`, `autor`, `pathName`) VALUES ('"+nombre+"', '"+enlace+"', '"+autor+"', '"+pathName+"');");
-    console.log("Upload completed!");
     return enlace;
   },
   
