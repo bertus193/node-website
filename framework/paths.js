@@ -94,15 +94,14 @@ app.get('/images/:enlace', function(pet,resp){
 		
 		framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
 			if(err){
-				resp.send("Parece que ha habido un error");
+				resp.render('../views/viewImage.ejs', {msg : 1})
 			}
 			else if(rows.length == 0){
-				resp.send("no existe dicha imagen");
+				resp.render('../views/viewImage.ejs', {msg : 2})
 			}
 			else{
-				var fullUrl = '<img src="' + pet.protocol + '://' + pet.get('host') + '/images/lib/';
-				var salida = fullUrl + rows[0].pathName + '"/>';
-				resp.send(salida);
+				var urlImage = pet.protocol + '://' + pet.get('host') + '/images/lib/' + rows[0].pathName;
+				resp.render('../views/viewImage.ejs', {urlImage, rows})
 			}
 		})
 })

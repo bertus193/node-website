@@ -1,0 +1,80 @@
+<% include header.ejs %>
+
+<style>
+  .columnLeft{
+    background-color: #7773;
+    width: 75%; 
+    display: inline-block;
+    height: 400px;
+  }
+  .columnLeft div{
+    padding:15px;
+  }
+  .columnRight{
+    width: 25%; 
+    display: inline-block;
+    text-align:left;
+    vertical-align: top;
+    height: 400px;
+  }
+  .columnRight div{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+</style>
+
+<body>
+<div class="container">
+   <div class="jumbotron text-center">
+   <% if(typeof msg !== 'undefined' && msg !== null){%>    
+         <%if(msg == 1){%>
+           <div class="alert alert-dismissible alert-danger">
+            Parece que ha habido algún error
+         <%}else if(msg == 2){%>
+           <div class="alert alert-dismissible alert-danger">
+            No existe dicha imagen
+         <%}%>
+           </div>  
+   <%}if(typeof urlImage !== 'undefined' && urlImage !== null){%>  
+         
+      <h1><i class="fa fa-file-image-o" aria-hidden="true"></i> Ver imagen</h1><br> 
+      
+      <div id="viewImage"></div>
+      
+      <script type="text/babel">
+         var viewImage = React.createClass({
+         render() {
+            return (
+                  <div>
+                    <span className="columnLeft">
+                    <div><img src="<%=urlImage%>"></img></div>
+                    </span>
+                    <span className="columnRight">
+                    <div>
+                      <div className="list-group table-of-contents">
+                        <a className="list-group-item">Nombre: <%= rows[0].nombre %></a>
+                        <a className="list-group-item">Autor: <%= rows[0].autor %></a>
+                        <a className="list-group-item">Fecha: <%= rows[0].fecha.getDate() + "/" + 
+                                                                  (rows[0].fecha.getMonth() +1) + "/" + 
+                                                                  rows[0].fecha.getFullYear() %></a>
+                        <a className="list-group-item">Likes: <%= rows[0].likes %></a>
+                      </div>
+                    </div>
+                    </span>
+                 </div>
+            );
+         }
+         })
+         //mostramos el componente
+         ReactDOM.render(
+            React.createElement(viewImage),
+            document.getElementById('viewImage')
+         )
+      </script>
+     
+   <%}%>  
+             
+   </div>
+</div>
+</body>
+</html>
