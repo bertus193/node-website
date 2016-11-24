@@ -15,20 +15,19 @@ app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
 
 app.get('/login', function(req, res) {
-	var error = req.query.error;
+	var msg = req.query.msg;
 	var token = framework.localStorage.token;
 	framework.getAuth().validateSession(token, function(err, user){
-			var error = req.query.error;
-			res.render('../views/login.ejs', {error, user})
+			res.render('../views/login.ejs', {msg, user})
 	})
 });
 
 app.post('/checkLogin', function(pet, resp) {
 	framework.getAuth().login(pet.body.user, pet.body.password, function(err, result){
 		if(err)
-			resp.redirect("/login?error=1")
+			resp.redirect("/login?msg=1")
 		else if(result == 2)
-			resp.redirect("/login?error=2")
+			resp.redirect("/login?msg=2")
 		else{
 			framework.localStorage.token = result;
 			resp.redirect("/perfil")
@@ -41,10 +40,10 @@ app.get('/logout', function(pet, resp) {
 		framework.getAuth().validateSession(token, function(err, user){
 				if(user.length == 1){
 						 framework.localStorage.token = null;
-						resp.redirect("/login?logout")
+						resp.redirect("/login?msg=4")
 				}
 				else {
-    				resp.redirect("/login?error=3")
+    				resp.redirect("/login?msg=3")
     		}
 		});
 
@@ -61,7 +60,7 @@ app.get('/perfil', function(pet, resp) {
 						resp.render('../views/profile.ejs', {user})
 				}
 				else {
-    				resp.redirect("/login?error=3")
+    				resp.redirect("/login?msg=3")
     		}
 		});
 

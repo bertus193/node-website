@@ -3,14 +3,19 @@
 <body>
 <div class="container">
    <div class="jumbotron text-center">
-      <% if(typeof error !== 'undefined' && error !== null){%>
-      <div class="alert alert-dismissible alert-danger">
-         <%if(error == 1){%>
+      <% if(typeof msg !== 'undefined' && msg !== null){%>    
+         <%if(msg == 1){%>
+           <div class="alert alert-dismissible alert-danger">
             Parece que ha habido algún error
-         <%}else if(error == 2){%>
+         <%}else if(msg == 2){%>
+             <div class="alert alert-dismissible alert-danger">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Contraseña y/o login incorrectos
-         <%}else if(error == 3){%>
+         <%}else if(msg == 3){%>
+            <div class="alert alert-dismissible alert-danger">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Necesitas iniciar sesión
+         <%}else if(msg == 4){%>
+            <div class="alert alert-dismissible alert-success">
+            <strong><i class="fa fa-check" aria-hidden="true"></i></strong> Has cerrado sesión correctamente
          <%}%>
       </div>
       <%}%> 
