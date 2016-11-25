@@ -178,7 +178,7 @@ app.put('/images/edit/', function(pet, resp){
 })
 
 app.get('/', function(req, res){
-
+		var msg = req.query.msg;
     //set default variables
     var pageSize = 2;
     var currentPage = 1,
@@ -223,7 +223,8 @@ app.get('/', function(req, res){
 							pageSize: pageSize,
 							pageCount: pageCount,
 							currentPage: currentPage,
-							user
+							user,
+							msg
 					});
 			}
 	})

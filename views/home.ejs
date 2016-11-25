@@ -14,10 +14,15 @@ function deleteData(url){
 </script>
 <body>
 
-<div w3-include-html="header.ejs"></div> 
 <div class="container">
-
     <div class="jumbotron text-center">
+         <% if(typeof msg !== 'undefined' && msg !== null){%>    
+         <%if(msg == 1){%>
+           <div class="alert alert-dismissible alert-success">
+              <strong>¡Enhorabuena!</strong> la imagen ha sido eliminada correctamente
+           </div>
+         <%}}%>
+      
         <h1><span class="fa fa-picture-o"></span> HostIMG</h1>
         <h3>Galería de imágenes</h3>
         <ul class="list-group">  
