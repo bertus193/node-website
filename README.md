@@ -19,7 +19,7 @@
 
 ## 2. Framework
 
-Para hacer más entendible el codigo se ha utilizado un framework para repetir en la menor medida de lo posible código además de separar todo por categorias.Para
+Para hacer más entendible el codigo se ha utilizado un framework para repetir en la menor medida de lo posible código además de separar todo por categorias.
 
 ### Auth
 

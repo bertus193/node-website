@@ -3,8 +3,13 @@
   
 <% include header.ejs%>
 <script>
-function confirmar() {
-    confirm("¿Estás seguro?");
+function deleteData(url){
+  confirm("¿Deseas borrar la imagen?");
+  fetch(url, {
+    method: 'DELETE'
+  }).then(function(response){
+      window.location = "?msg=1";
+  })
 }
 </script>
 <body>
@@ -18,13 +23,9 @@ function confirmar() {
         <ul class="list-group">  
   <% images.forEach( function( image ) { %>
           <li class="list-group-item PaginationItem"><img class="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
-          
-          <form method="post" action="/images/delete/<%- image.enlace %>">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="PaginationButtons btn btn-primary">
-               <i class="fa fa-trash" aria-hidden="true"></i>
-          </button>
-          </form> 
+          <button class="PaginationButtons btn btn-primary" onclick="deleteData('/images/delete/<%- image.enlace %>')">
+            <i class="fa fa-trash" aria-hidden="true"></i></button>
+      
           <a href="#"><div class="PaginationButtons btn btn-primary" style="bottom: 45px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </div></a>
