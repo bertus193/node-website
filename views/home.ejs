@@ -26,50 +26,44 @@ function deleteData(url){
         <h1><span class="fa fa-picture-o"></span> HostIMG</h1>
         <h3>Galería de imágenes</h3>
         <ul class="list-group">  
-  <% images.forEach( function( image ) { %>
-          <li class="list-group-item PaginationItem"><img class="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
-          <button class="PaginationButtons btn btn-primary" onclick="deleteData('/images/delete/<%- image.enlace %>')">
-            <i class="fa fa-trash" aria-hidden="true"></i></button>
-      
-          <a href="/images/edit/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary" style="bottom: 45px;">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-          </div></a>
-          <a href="/images/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary" style="bottom: 90px;">
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          </div></a>
-      </li>
-  <% }) %>
-</ul>
+         <% images.forEach( function( image ) { %>
+             <li class="list-group-item PaginationItem"><img class="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
+             <button class="PaginationButtons btn btn-primary" onclick="deleteData('/images/delete/<%- image.enlace %>')">
+               <i class="fa fa-trash" aria-hidden="true"></i></button>
 
-<% if (pageCount > 1) { %>  
-<ul class="pagination">  
-  <% if (currentPage > 1) { %>
-      <!--<li><a href="/?page=1">&laquo;</a></li>-->
-  <% } %>
-  <% var i = 1;
-  if (currentPage > 5) {
-  i = +currentPage - 4;
-  } %>
-  <% if (i !== 1) { %>
-      <li class="disabled"><a href="#">...</a></li>
-  <% } %>
-  <% for (i; i<=pageCount; i++) { %>
-    <% if (currentPage == i) { %>
-        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
-    <% } else { %>
-        <li><a href="/?page=<%= i %>"><%= i %></a></li>
-    <% } %>
-    <% if (i == (+currentPage + 4)) { %>
-        <li class="disabled"><a href="#">...</a></li>
-    <% break; } %>
-  <% } %>
-  <% if (currentPage != pageCount) { %>
-      <!--<li><a href="/?page=<%= pageCount %>">&raquo;</a></li>-->
-  <% } %>
-</ul>  
-<% } %> 
-    </div>
+             <a href="/images/edit/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary" style="bottom: 45px;">
+                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+             </div></a>
+             <a href="/images/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary" style="bottom: 90px;">
+                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
+             </div></a>
+            </li>
+       <% }) %>
+      </ul>
 
+      <% if (pageCount > 1) { %>  
+      <ul class="pagination">  
+        <% var i = 1;
+        if (currentPage > 5) {
+            i = +currentPage - 4;
+        } %>
+        <% if (i !== 1) { %>
+            <li class="disabled"><a href="#">...</a></li>
+        <% } %>
+        <% for (i; i<=pageCount; i++) { %>
+          <% if (currentPage == i) { %>
+              <li class="active"><span><%= i %></span></li>
+          <% } else { %>
+              <li><a href="/?page=<%= i %>"><%= i %></a></li>
+          <% } %>
+          <% if (i == (+currentPage + 4)) { %>
+              <li class="disabled"><a href="#">...</a></li>
+          <% break; } %>
+        <% } %>
+      </ul>  
+      <% } %> 
+   
+   </div>
 </div>
 </body>
 </html>

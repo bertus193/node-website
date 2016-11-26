@@ -200,10 +200,7 @@ app.get('/', function(req, res){
 		var msg = req.query.msg;
     //set default variables
     var pageSize = 2;
-    var currentPage = 1,
-        images = [],
-        imagesArrays = [], 
-        imagesList = [];
+    var currentPage = 1,imagesArrays = [], imagesList = [];
 
     //genreate list of students
 			var token = framework.localStorage.token;
@@ -216,11 +213,9 @@ app.get('/', function(req, res){
 			if(err){
 				res.send("Parece que ha habido un error");
 			}
-			/*else if(result == 0){
-				resp.send("No se ha encontrado ninguna imagen");
-			}*/
 			else{
 					var totalImages = images.length;
+				console.log(images.length);
 					var pageCount = totalImages/pageSize;
 					var url = req.protocol + '://' + req.get('host') + "/images/lib/";
 					//split list into groups

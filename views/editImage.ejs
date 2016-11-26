@@ -19,10 +19,10 @@
          
       <h1><i class="fa fa-file-image-o" aria-hidden="true"></i> Ver imagen</h1><br> 
       
-      <div id="viewImage"></div>
+      <div id="editImage"></div>
       
       <script type="text/babel">
-         var viewImage = React.createClass({
+         var editImage = React.createClass({
          
           
         editImage(url) {
@@ -67,8 +67,8 @@
          })
          //mostramos el componente
          ReactDOM.render(
-            React.createElement(viewImage),
-            document.getElementById('viewImage')
+            React.createElement(editImage),
+            document.getElementById('editImage')
          )
       </script>
      
