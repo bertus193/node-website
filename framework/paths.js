@@ -197,7 +197,6 @@ app.put('/images/edit/:enlace', function(pet, resp){
 })
 
 app.get('/', function(req, res){
-		var msg = req.query.msg;
     //set default variables
     var pageSize = 2;
     var currentPage = 1,imagesArrays = [], imagesList = [];
@@ -215,7 +214,6 @@ app.get('/', function(req, res){
 			}
 			else{
 					var totalImages = images.length;
-				console.log(images.length);
 					var pageCount = totalImages/pageSize;
 					var url = req.protocol + '://' + req.get('host') + "/images/lib/";
 					//split list into groups
@@ -237,8 +235,7 @@ app.get('/', function(req, res){
 							pageSize: pageSize,
 							pageCount: pageCount,
 							currentPage: currentPage,
-							user,
-							msg
+							user
 					});
 			}
 	})

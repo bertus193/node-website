@@ -47,3 +47,11 @@ input[type="file"]{
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.buttonEdit{
+  bottom: 45px;
+}
+
+.buttonDelete{
+  bottom: 90px;
+}

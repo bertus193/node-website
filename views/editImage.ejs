@@ -3,9 +3,7 @@
 <body>
 <div class="container">
    <div class="jumbotron text-center">
-     <div id="editok" class="alert alert-dismissible alert-success" style="visibility: hidden;">
-            <strong>¡Enhorabuena!</strong> la imagen ha sido editada correctamente
-     </div>
+     <span id="editok"></span>
    <% if(typeof msg !== 'undefined' && msg !== null){%>    
          <%if(msg == 1){%>
            <div class="alert alert-dismissible alert-danger">
@@ -37,7 +35,7 @@
               'Content-Type': 'application/json'
             }
           }).then(function(response){
-              document.getElementById("editok").style.visibility="visible"
+              document.getElementById("editok").innerHTML+="<div class='alert alert-dismissible alert-success'><strong>¡Enhorabuena!</strong> la imagen ha sido editada correctamente</div>";
           })
         },
         
