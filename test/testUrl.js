@@ -14,7 +14,7 @@ describe('Test Paths', function(){
         supertest(app)
             .get('/')
             .expect(function(res) {
-               assert(res.text.indexOf('Hostimg') > -1);
+               assert(res.text.indexOf('HostIMG') > -1);
               })
             .expect(200,done)
     });
@@ -23,10 +23,8 @@ describe('Test Paths', function(){
     it('La ruta /hola no existe', function(done){
         supertest(app)
             .get('/hola')
-            .expect(function(res) {
-               assert(res.text.indexOf('<img src="/images/web/404.jpg">') > -1);
-              })
-            .expect(404, done);
+            .expect('Found. Redirecting to /404')
+            .expect(302, done);
     });
 
     //TEST 3
@@ -35,9 +33,9 @@ describe('Test Paths', function(){
             .post('/images/upload/')
             .attach('image', path.join(__dirname, 'x.png'))
             .expect(function(res) {
-               assert(res.text.split(' ')[0] == 'x.png');
+               assert(res.text.indexOf('Redirecting to /images') > -1);
               })
-            .expect(200, done);
+            .expect(302, done);
     });
   
     //TEST 4
@@ -97,8 +95,8 @@ describe('Test Paths', function(){
         supertest(app)                    
             .post('/images/upload')
             .attach('image', path.join(__dirname, 'x.jpg'))
-            .expect('Only .png files are allowed!')
-            .expect(200, done);
+            .expect('Found. Redirecting to /images/upload?msg=2')
+            .expect(302, done);
     });
   
     

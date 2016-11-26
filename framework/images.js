@@ -55,11 +55,9 @@ var images = {
     return str;
 },
   
-updateImage(image, callback){
-    var id = image.id;
-    var nombre = image.nombre;
+updateImage(enlace,nombre, callback){
     var con = framework.getMysql().getCon();
-    con.query('UPDATE imagenes SET nombre = "' + nombre + '" WHERE id = '+id+' LIMIT 1',function(err,rows){
+    con.query('UPDATE imagenes SET nombre = "' + nombre + '" WHERE enlace = "'+enlace+'" LIMIT 1',function(err,rows){
       if(err) 
         callback(err);
         callback(undefined, rows.affectedRows);

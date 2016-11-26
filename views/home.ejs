@@ -31,7 +31,7 @@ function deleteData(url){
           <button class="PaginationButtons btn btn-primary" onclick="deleteData('/images/delete/<%- image.enlace %>')">
             <i class="fa fa-trash" aria-hidden="true"></i></button>
       
-          <a href="#"><div class="PaginationButtons btn btn-primary" style="bottom: 45px;">
+          <a href="/images/edit/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary" style="bottom: 45px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </div></a>
           <a href="/images/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary" style="bottom: 90px;">

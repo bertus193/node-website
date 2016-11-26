@@ -161,10 +161,29 @@ app.delete('/images/deleteLastImage', function(pet, resp){
 			}
 	})
 })
+
+app.get('/images/edit/:enlace', function(pet,resp){
+		var msg = pet.query.msg;
+		var token = framework.localStorage.token;
+		framework.getAuth().validateSession(token, function(err, user){
+				framework.getImages().getImageByLink(pet.params.enlace, function(err, rows){
+					if(err){
+						resp.render('../views/editImage.ejs', {msg : 1, user})
+					}
+					else if(rows.length == 0){
+						resp.render('../views/editImage.ejs', {msg : 2, user})
+					}
+					else{
+						var urlImage = pet.protocol + '://' + pet.get('host') + '/images/lib/' + rows[0].pathName;
+						resp.render('../views/editImage.ejs', {urlImage, rows, user, msg})
+					}
+				})
+		})
+})
 	
-app.put('/images/edit/', function(pet, resp){
-	var image = pet.body;
-	framework.getImages().updateImage(image, function(err, result){
+app.put('/images/edit/:enlace', function(pet, resp){
+	var nombre = pet.body.nombre;
+	framework.getImages().updateImage(pet.params.enlace, nombre, function(err, result){
 			if(err){
 				resp.send("Parece que ha habido un error");
 			}

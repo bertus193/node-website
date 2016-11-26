@@ -1,0 +1,78 @@
+<% include header.ejs %>
+
+<body>
+<div class="container">
+   <div class="jumbotron text-center">
+     <div id="editok" class="alert alert-dismissible alert-success" style="visibility: hidden;">
+            <strong>¡Enhorabuena!</strong> la imagen ha sido editada correctamente
+     </div>
+   <% if(typeof msg !== 'undefined' && msg !== null){%>    
+         <%if(msg == 1){%>
+           <div class="alert alert-dismissible alert-danger">
+            Parece que ha habido algún error
+         <%}else if(msg == 2){%>
+           <div class="alert alert-dismissible alert-danger">
+            No existe dicha imagen
+         <%}%>
+             
+   <%}if(typeof urlImage !== 'undefined' && urlImage !== null){%>  
+         
+      <h1><i class="fa fa-file-image-o" aria-hidden="true"></i> Ver imagen</h1><br> 
+      
+      <div id="viewImage"></div>
+      
+      <script type="text/babel">
+         var viewImage = React.createClass({
+         
+          
+        editImage(url) {
+          var nombre = document.getElementById("nombre").value;
+          fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify({
+                    nombre: document.getElementById('nombre').value
+            }),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          }).then(function(response){
+              document.getElementById("editok").style.visibility="visible"
+          })
+        },
+        
+         render() {
+            return (
+                  <div>
+                    <span className="columnLeft">
+                    <div><img src="<%=urlImage%>"></img></div>
+                    </span>
+                    <span className="columnRight">
+                    <div>
+                      <div className="list-group table-of-contents">
+                        <span className="list-group-item">Nombre: <input id="nombre" type="text" defaultValue="<%= rows[0].nombre %>"></input></span>
+                        <a className="list-group-item">Autor: <%= rows[0].autor %></a>
+                        <a className="list-group-item">Fecha: <%= rows[0].fecha.getDate() + "/" + 
+                                                                  (rows[0].fecha.getMonth() +1) + "/" + 
+                                                                  rows[0].fecha.getFullYear() %></a>
+                        <a className="list-group-item">Likes: <%= rows[0].likes %></a>
+                        <br></br><button className="btn btn-primary" 
+                                      onClick={this.editImage.bind(this,'/images/edit/<%- rows[0].enlace %>')}>Editar</button>
+                      </div>
+                    </div>
+                    </span>
+                 </div>
+            );
+         }
+         })
+         //mostramos el componente
+         ReactDOM.render(
+            React.createElement(viewImage),
+            document.getElementById('viewImage')
+         )
+      </script>
+     
+   <%}%>  
+</div>
+</body>
+</html>
