@@ -13,17 +13,36 @@
          <%}%>
            </div>  
    <%}%>
-      <h1><i class="fa fa-cloud-upload" aria-hidden="true"></i> Subir imagen</h1><br></br>
-        <form action="/images/upload" method="POST" enctype="multipart/form-data">
-          <% if(typeof user !== 'undefined' && user !== null && user.length == 1){%>
-             <input type="hidden" name="user" value="<%=user[0].username%>">
-          <%}else{%>
-            <input type="hidden" name="user" value="Anónimo">
-          <%}%>
-         
-          <input class="btn btn-default" type='file' name='image'/><br></br>
-          <input class="btn btn-primary" type="submit" value="Subir imagen"></input>
-        </form>
+             
+            <div id="uploadImage"></div>
+      
+         <script type="text/babel">
+         var uploadImage = React.createClass({
+        
+        render() {
+            return (
+              <div>
+                  <form action="/images/upload" method="POST" encType="multipart/form-data">
+                  <h1><i className="fa fa-cloud-upload" aria-hidden="true"></i> Subir imagen</h1><br></br>
+                    <% if(typeof user !== 'undefined' && user !== null && user.length == 1){%>
+                       <input type="hidden" name="user" value="<%=user[0].username%>"></input>
+                    <%}else{%>
+                      <input type="hidden" name="user" value="Anónimo"></input>
+                    <%}%>
+
+                    <input className="btn btn-default" type='file' name='image'></input><br></br><br></br>
+                    <input class="btn btn-primary" type="submit" value="Subir imagen"></input>
+                    </form>
+              </div>
+            );
+         }
+         })
+         //mostramos el componente
+         ReactDOM.render(
+            React.createElement(uploadImage),
+            document.getElementById('uploadImage')
+         )
+      </script>
    </div>
 </div>
 </body>

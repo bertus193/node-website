@@ -22,7 +22,7 @@ app.get('/login', function(req, res) {
 	})
 });
 
-app.post('/checkLogin', function(pet, resp) {
+app.post('/login', function(pet, resp) {
 	framework.getAuth().login(pet.body.user, pet.body.password, function(err, result){
 		if(err)
 			resp.redirect("/login?msg=1")

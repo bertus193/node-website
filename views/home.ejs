@@ -17,12 +17,13 @@
          var viewGallery = React.createClass({
          
           
-        deleteImage(url) {
+        deleteImage(url,enlace) {
            confirm("¿Deseas borrar la imagen?");
            fetch(url, {
            method: 'DELETE'
           }).then(function(response){
-              document.getElementById("deleteOK").innerHTML+="<div class='alert alert-dismissible alert-success'><strong>¡Enhorabuena!</strong> la imagen ha sido eliminada correctamente<br></br>Para ver los cambios recarga la pagina</div>";
+              var box = document.getElementById(enlace);
+              box.innerHTML="<h3 class='PaginationItemDeleted'><i class='fa fa-check' aria-hidden='true'></i><strong> La imagen ha sido eliminada correctamente.</strong></h3>";
           })
         },
         
@@ -32,8 +33,9 @@
                <h3>Galería de imágenes</h3>
                <ul className="list-group">  
                                        <% images.forEach( function( image ) { %>
-                            <li className="list-group-item PaginationItem"><img className="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
-                            <button className="PaginationButtons btn btn-primary" onClick={this.deleteImage.bind(this,'/images/delete/<%- image.enlace %>')}>
+                            <li id="<%- image.enlace %>" className="list-group-item PaginationItem"><img className="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
+                            <button className="PaginationButtons btn btn-primary" onClick={this.deleteImage.bind(this,'/images/delete/<%- image.enlace %>')
+                                                                                                           .bind(this,'<%- image.enlace %>')}>
                               <i className="fa fa-trash" aria-hidden="true"></i></button>
 
                             <a href="/images/edit/<%= image.enlace %>"><div className="PaginationButtons btn btn-primary buttonEdit">
