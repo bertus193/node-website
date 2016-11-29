@@ -13,11 +13,30 @@
          <%}%>
            </div>  
    <%}%>
-             
-            <div id="uploadImage"></div>
+         <div id="error"></div>
+         <div id="uploadImage"></div>
       
          <script type="text/babel">
          var uploadImage = React.createClass({
+         
+        uploadImage() {
+          var input = document.querySelector('input[type="file"]');
+          var submit = document.getElementById("subirImagen");
+          var error = document.getElementById("error");
+          
+          error.innerHTML = '';
+          submit.innerHTML = '';
+          
+          var fileExtension = input.files[0].name.split('.').pop();
+          if(fileExtension == 'png'){
+            submit.innerHTML = '<input  class="btn btn-primary" type="submit" value="Subir imagen"></input>';
+          }
+          else{
+            error.innerHTML = '<div class="alert alert-dismissible alert-danger">Solo se puede utilizar el formato .png</div>';
+          }
+          
+              
+        },
         
         render() {
             return (
@@ -30,8 +49,8 @@
                       <input type="hidden" name="user" value="Anónimo"></input>
                     <%}%>
 
-                    <input className="btn btn-default" type='file' name='image'></input><br></br><br></br>
-                    <input class="btn btn-primary" type="submit" value="Subir imagen"></input>
+                    <input className="btn btn-default" type='file' name='image' onChange={this.uploadImage}></input><br></br><br></br>
+                    <span id="subirImagen"></span>
                     </form>
               </div>
             );
