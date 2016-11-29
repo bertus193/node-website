@@ -23,15 +23,18 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/login', function(pet, resp) {
-	framework.getAuth().login(pet.body.user, pet.body.password, function(err, result){
-		if(err)
-			resp.redirect("/login?msg=1")
-		else if(result == 2)
-			resp.redirect("/login?msg=2")
-		else{
-			framework.localStorage.token = result;
-			resp.redirect("/perfil")
-		}
+	var token = framework.localStorage.token;
+	framework.getAuth().validateSession(token, function(err, user){
+		framework.getAuth().login(pet.body.user, pet.body.password, function(err, result){
+			if(err)
+				resp.render('../views/login.ejs', {msg : 1, user})
+			else if(result == 2)
+				resp.render('../views/login.ejs', {msg : 2, user})
+			else{
+				framework.localStorage.token = result;
+				resp.redirect("/perfil")
+			}
+		})
 	})
 })
 
@@ -48,10 +51,6 @@ app.get('/logout', function(pet, resp) {
 		});
 
 });
-
-app.get('/checkLogin', function(pet, resp) {
-	resp.redirect("/login")
-})
 
 app.get('/perfil', function(pet, resp) {
 	  var token = framework.localStorage.token;
