@@ -66,8 +66,7 @@ Finalidad: Posee todas las rutas disponibles para el usuario iniciada o sin inic
 
 *HdU5: Subir imagen.*
 >  Para subir una foto deberá clickear en el menú superior a `Subir imágenes` donde le llevará a una pagina donde subir la imagen.
->  - Si no se indica ninguna imagen mostrará el error `Debes seleccionar una imagen`.
->  - Si el formato del archivo no es .PNG aparecerá el mensaje de error `Solo se puede utilizar el formato .png`.
+>  - Si el formato del archivo no es .PNG aparecerá el mensaje de error `Solo se puede utilizar el formato .png` al seleccionar el archivo.
 >  - Si se sube el archivo correctamente lo subirá como anónimo a no ser que se haya iniciado sesión y deirigirá a `/images/URL-DE-IMAGEN` mostrando el mensaje éxito  `¡Enhorabuena! la imagen ha sido subida correctamente`
 
 *HdU6: Borrar imagen.*
