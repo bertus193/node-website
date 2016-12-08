@@ -15,7 +15,7 @@
              
    <%}if(typeof urlImage !== 'undefined' && urlImage !== null){%>  
          
-      <h1><i class="fa fa-file-image-o" aria-hidden="true"></i> Ver imagen</h1><br> 
+      <h1><i class="fa fa-pencil" aria-hidden="true"></i> Editar imagen</h1><br> 
       
       <div id="editImage"></div>
       
@@ -31,7 +31,6 @@
                     nombre: document.getElementById('nombre').value
             }),
             headers: {
-              'Accept': 'application/json',
               'Content-Type': 'application/json'
             }
           }).then(function(response){

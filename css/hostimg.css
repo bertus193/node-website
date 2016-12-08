@@ -17,11 +17,6 @@ input[type="file"]{
       min-height: 300px;
 }
 
-.PaginationItemDeleted{
-      line-height: 270px !important;
-      color: #14cb14;
-}
-
 .PaginationImg{
       max-height: 300px;
 }

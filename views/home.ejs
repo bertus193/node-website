@@ -3,83 +3,36 @@
   
 <% include header.ejs%>
 
-<body>
-
+<body onload="cargarGaleria()">
+   <script>
+      function cargarGaleria(){
+         fetch('/functions/verGaleria')
+          .then(function(res) {
+              return res.text();
+          }).then(function(body) {
+              document.getElementById("verGaleria").innerHTML = body;
+            console.log(body);
+          });
+      }
+      function deleteImage(url,enlace) {
+         if(confirm("¿Deseas borrar la imagen?") == true){
+           fetch(url, {
+             method: 'GET'
+            }).then(function(response){
+                var box = document.getElementById('deleteOK');
+                box.innerHTML="<div class='alert alert-dismissible alert-success'><i class='fa fa-check' aria-hidden='true'></i> La imagen ha sido eliminada correctamente.</div>";
+            })
+         }
+         
+      }
+   </script>
 <div class="container">
     <div class="jumbotron text-center">
          <span id="deleteOK"></span>
       
          <h1><span class="fa fa-picture-o"></span> HostIMG</h1>
-       
-         <div id="viewGallery"></div>
-      
-         <script type="text/babel">
-         var viewGallery = React.createClass({
          
-          
-        deleteImage(url,enlace) {
-           confirm("¿Deseas borrar la imagen?");
-           fetch(url, {
-           method: 'DELETE'
-          }).then(function(response){
-              var box = document.getElementById(enlace);
-              box.innerHTML="<h3 class='PaginationItemDeleted'><i class='fa fa-check' aria-hidden='true'></i><strong> La imagen ha sido eliminada correctamente.</strong></h3>";
-          })
-        },
-        
-        render() {
-            return (
-               <div>
-               <h3>Galería de imágenes</h3>
-               <ul className="list-group">  
-                                       <% images.forEach( function( image ) { %>
-                            <li id="<%- image.enlace %>" className="list-group-item PaginationItem"><img className="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
-                            <button className="PaginationButtons btn btn-primary" onClick={this.deleteImage.bind(this,'/images/delete/<%- image.enlace %>')
-                                                                                                           .bind(this,'<%- image.enlace %>')}>
-                              <i className="fa fa-trash" aria-hidden="true"></i></button>
-
-                            <a href="/images/edit/<%= image.enlace %>"><div className="PaginationButtons btn btn-primary buttonEdit">
-                                <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </div></a>
-                            <a href="/images/<%= image.enlace %>"><div className="PaginationButtons btn btn-primary buttonDelete">
-                                <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                            </div></a>
-                           </li>
-                      <% }) %>
-               </ul>
-               </div>
-            );
-         }
-         })
-         //mostramos el componente
-         ReactDOM.render(
-            React.createElement(viewGallery),
-            document.getElementById('viewGallery')
-         )
-      </script>
-       
-
-      <% if (pageCount > 1) { %>  
-      <ul class="pagination">  
-        <% var i = 1;
-        if (currentPage > 5) {
-            i = +currentPage - 4;
-        } %>
-        <% if (i !== 1) { %>
-            <li class="disabled"><a href="#">...</a></li>
-        <% } %>
-        <% for (i; i<=pageCount; i++) { %>
-          <% if (currentPage == i) { %>
-              <li class="active"><span><%= i %></span></li>
-          <% } else { %>
-              <li><a href="/?page=<%= i %>"><%= i %></a></li>
-          <% } %>
-          <% if (i == (+currentPage + 4)) { %>
-              <li class="disabled"><a href="#">...</a></li>
-          <% break; } %>
-        <% } %>
-      </ul>  
-      <% } %> 
+        <div id="verGaleria"></div>
    
    </div>
 </div>
