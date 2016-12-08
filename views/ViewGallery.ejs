@@ -1,5 +1,4 @@
 <div>
-       <h3>Galería de imágenes</h3>
        <ul class="list-group">  
                                <% images.forEach( function( image ) { %>
                     <li id="<%- image.enlace %>" class="list-group-item PaginationItem"><img class="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
@@ -31,7 +30,7 @@ if (currentPage > 5) {
   <% if (currentPage == i) { %>
       <li class="active"><span><%= i %></span></li>
   <% } else { %>
-      <li><a href="/?page=<%= i %>"><%= i %></a></li>
+      <li><a style="cursor: pointer;" onClick="cargarGaleria('/functions/verGaleria?page=<%= i %>')"><%= i %></a></li>
   <% } %>
   <% if (i == (+currentPage + 4)) { %>
       <li class="disabled"><a href="#">...</a></li>

@@ -3,15 +3,16 @@
   
 <% include header.ejs%>
 
-<body onload="cargarGaleria()">
+<body onload="cargarGaleria('/functions/verGaleria?page=<%= currentPage %>')">
    <script>
-      function cargarGaleria(){
-         fetch('/functions/verGaleria')
-          .then(function(res) {
+      function cargarGaleria(url){
+         fetch(url, {
+            method: 'GET',
+            query: { page: 1 }
+          }).then(function(res) {
               return res.text();
           }).then(function(body) {
               document.getElementById("verGaleria").innerHTML = body;
-            console.log(body);
           });
       }
       function deleteImage(url,enlace) {
@@ -31,8 +32,8 @@
          <span id="deleteOK"></span>
       
          <h1><span class="fa fa-picture-o"></span> HostIMG</h1>
-         
-        <div id="verGaleria"></div>
+         <h3>Galería de imágenes</h3>
+        <div id="verGaleria"> Cargando galería... </div>
    
    </div>
 </div>
