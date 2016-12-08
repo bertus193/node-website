@@ -31,7 +31,7 @@ CREATE TABLE `imagenes` (
   `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `pathName` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `imagenes` (
 
 LOCK TABLES `imagenes` WRITE;
 /*!40000 ALTER TABLE `imagenes` DISABLE KEYS */;
-INSERT INTO `imagenes` VALUES (2,'test','bcsasd','Alguien mu famoso',10,'2016-10-26 22:00:35','b.png'),(3,'Test','jr829','Eutaquio',3,'2016-10-26 16:12:11','jr829_b.png'),(4,'Nombreimg','6lrjg','Carl',100,'2016-10-27 06:40:51','6lrjg.png'),(5,'Podria set batman','2tepb','Otto',57,'2016-10-27 06:54:53','2tepb.png'),(6,'No es eso en verdad','g2z4v','Samsung',18,'2016-10-27 06:57:07','g2z4v.png'),(7,'Pasado o realidad','u1l7a','Yokese',6,'2016-11-07 11:18:59','u1l7a.png'),(10,'Nueva Imagen','d7ril','Anónimo',0,'2016-12-08 11:13:11','d7ril.png');
+INSERT INTO `imagenes` VALUES (2,'test','bcsasd','Alguien mu famoso',10,'2016-10-26 22:00:35','b.png'),(3,'Test','jr829','Eutaquio',3,'2016-10-26 16:12:11','jr829_b.png'),(4,'Nombreimg','6lrjg','Carl',100,'2016-10-27 06:40:51','6lrjg.png'),(5,'Podria set batman','2tepb','Otto',57,'2016-10-27 06:54:53','2tepb.png'),(6,'No es eso en verdad','g2z4v','Samsung',18,'2016-10-27 06:57:07','g2z4v.png'),(7,'Pasado o realidad','u1l7a','Yokese',6,'2016-11-07 11:18:59','u1l7a.png');
 /*!40000 ALTER TABLE `imagenes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,4 +80,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-08  6:59:22
+-- Dump completed on 2016-12-08 12:14:37
