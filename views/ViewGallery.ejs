@@ -2,7 +2,7 @@
        <ul class="list-group">  
                                <% images.forEach( function( image ) { %>
                     <li id="<%- image.enlace %>" class="list-group-item PaginationItem"><img class="PaginationImg" src="/images/lib/<%- image.pathName %>"></img>
-                    <button class="PaginationButtons btn btn-primary" onClick="deleteImage('/images/delete/<%- image.enlace %>' ,'<%- image.enlace %>')">
+                    <button class="PaginationButtons btn btn-primary" onClick="deleteImage('/images/delete/<%- image.enlace %>' ,'<%- image.enlace %>', '<%- currentPage %>' )">
                       <i class="fa fa-trash" aria-hidden="true"></i></button>
 
                     <a href="/images/edit/<%= image.enlace %>"><div class="PaginationButtons btn btn-primary buttonEdit">

@@ -11,17 +11,15 @@
       }
      
       function cargarGaleria(url){
-         fetch(url, {
-            method: 'GET',
-            query: { page: 1 }
-          }).then(function(res) {
+         fetch(url)
+           .then(function(res) {
               return res.text();
           }).then(function(body) {
               document.getElementById("verGaleria").innerHTML = body;
           });
       }
      
-      function deleteImage(url,enlace) {
+      function deleteImage(url,enlace, page) {
          var box = document.getElementById('deleteOK');
          box.innerHTML= "";
          if(confirm("¿Deseas borrar la imagen?") == true){
@@ -29,7 +27,7 @@
              method: 'DELETE'
             }).then(function(response){
                 box.innerHTML="<div class='alert alert-dismissible alert-success'><i class='fa fa-check' aria-hidden='true'></i> La imagen ha sido eliminada correctamente.<i title='Cerrar notificación' onClick='cerrarNotificacionBorrado()' class='fa fa-times' style='cursor: pointer;position: relative;float: right;top: 3px;' aria-hidden='true'></i></div>";
-                cargarGaleria('/functions/verGaleria?page=1');
+                cargarGaleria('/functions/verGaleria?page=' + page);
            })
          }
       } 
