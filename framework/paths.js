@@ -201,13 +201,8 @@ app.get('/', function(req, res){
 		if(err){
 			res.send("Parece que ha habido un error");
 		}
-		var currentPage = 1;
-		if(req.query.page){
-				currentPage = req.query.page;
-		}
 		
-		
-		res.render('../views/home.ejs', {user, currentPage});	
+		res.render('../views/home.ejs', {user});	
 	})
 });
 

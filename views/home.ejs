@@ -3,12 +3,13 @@
   
 <% include header.ejs%>
 
-<body onload="cargarGaleria('/functions/verGaleria?page=<%= currentPage %>')">
+<body onload="cargarGaleria('/functions/verGaleria?page=1')">
    <script>
       function cerrarNotificacionBorrado(){
          var box = document.getElementById('deleteOK');
          box.innerHTML= ""; 
       }
+     
       function cargarGaleria(url){
          fetch(url, {
             method: 'GET',
@@ -19,6 +20,7 @@
               document.getElementById("verGaleria").innerHTML = body;
           });
       }
+     
       function deleteImage(url,enlace) {
          var box = document.getElementById('deleteOK');
          box.innerHTML= "";
@@ -27,7 +29,7 @@
              method: 'DELETE'
             }).then(function(response){
                 box.innerHTML="<div class='alert alert-dismissible alert-success'><i class='fa fa-check' aria-hidden='true'></i> La imagen ha sido eliminada correctamente.<i title='Cerrar notificación' onClick='cerrarNotificacionBorrado()' class='fa fa-times' style='cursor: pointer;position: relative;float: right;top: 3px;' aria-hidden='true'></i></div>";
-                cargarGaleria('/functions/verGaleria?page='+<%= currentPage %>);
+                cargarGaleria('/functions/verGaleria?page=1');
            })
          }
       } 
