@@ -214,13 +214,16 @@ app.get('/functions/verGaleria', function(req, res){
 		//set default variables
 	var pageSize = 2;
 	var currentPage = 1,imagesArrays = [], imagesList = [];
-	framework.getImages().getLast10Images(function(err, images){
+	framework.getImages().getGalleryImages(function(err, images){
 			if(err){
 				res.send("Parece que ha habido un error");
 			}
 			else{
 					var totalImages = images.length;
 					var pageCount = totalImages/pageSize;
+					if(totalImages % 2 != 0){
+						pageCount++;
+					}
 				
 					while (images.length > 0) {
 							imagesArrays.push(images.splice(0, pageSize));

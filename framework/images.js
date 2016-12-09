@@ -64,11 +64,11 @@ updateImage(enlace,nombre, callback){
     });    
 },
   
-getLast10Images(callback){
+getGalleryImages(callback){
     var con = framework.getMysql().getCon();
     var images = [];
       
-    con.query('SELECT * FROM imagenes ORDER BY id DESC LIMIT 10',function(err,rows){
+    con.query('SELECT * FROM imagenes ORDER BY id DESC',function(err,rows){
       if(err) 
         callback(err);
         callback(undefined, rows);
