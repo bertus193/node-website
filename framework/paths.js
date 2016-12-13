@@ -235,7 +235,7 @@ app.get('/functions/verGaleria', function(req, res){
 				
 					imagesList = imagesArrays[+currentPage - 1];
 				
-					res.render('../views/ViewGallery.ejs', {
+					res.render('../views/viewGallery.ejs', {
 							images: imagesList,
 							pageSize: pageSize,
 							pageCount: pageCount,

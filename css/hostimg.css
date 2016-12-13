@@ -14,11 +14,11 @@ input[type="file"]{
 }
 
 .PaginationItem{
-      min-height: 300px;
+      height: 300px;
 }
 
 .PaginationImg{
-      max-height: 300px;
+      max-height: 280px;
 }
 
 .columnLeft{
