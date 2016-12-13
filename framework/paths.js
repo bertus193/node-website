@@ -14,27 +14,16 @@ app.set('view engine', 'ejs');
 app.use(bp.urlencoded({ extended: true })) //POST obtener datos
 app.use(bp.json())
 
-app.get('/login', function(req, res) {
-	var msg = req.query.msg;
-	var token = framework.localStorage.token;
-	framework.getAuth().validateSession(token, function(err, user){
-			res.render('../views/login.ejs', {msg, user})
-	})
-});
-
 app.post('/login', function(pet, resp) {
-	var token = framework.localStorage.token;
-	framework.getAuth().validateSession(token, function(err, user){
-		framework.getAuth().login(pet.body.user, pet.body.password, function(err, result){
-			if(err)
-				resp.render('../views/login.ejs', {msg : 1, user})
-			else if(result == 2)
-				resp.render('../views/login.ejs', {msg : 2, user})
-			else{
-				framework.localStorage.token = result;
-				resp.redirect("/perfil")
-			}
-		})
+	framework.getAuth().login(pet.body.user, pet.body.pass, function(err, result){
+		if(err)
+			resp.send("Parece que ha habido algún error");
+		else if(result == 2)
+			resp.send("Contraseña y/o login incorrectos");
+		else{
+			framework.localStorage.token = result;
+			resp.send("OK");
+		}
 	})
 })
 
@@ -42,11 +31,11 @@ app.get('/logout', function(pet, resp) {
 	  var token = framework.localStorage.token;
 		framework.getAuth().validateSession(token, function(err, user){
 				if(user.length == 1){
-						 framework.localStorage.token = null;
-						resp.redirect("/login?msg=4")
+					framework.localStorage.token = null;
+					resp.redirect("/")
 				}
 				else {
-    				resp.redirect("/login?msg=3")
+    				resp.redirect("/404")
     		}
 		});
 
@@ -117,6 +106,7 @@ app.get('/images/:enlace', function(pet,resp){
 
 app.use('/images/web', framework.express.static('images/web'));
 app.use('/css', framework.express.static('css'));
+app.use('/js', framework.express.static('js'));
 
 app.get('/images/lib/:enlace', function(pet,resp){
 		var imageDir = './images/lib/';
