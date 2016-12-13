@@ -1,11 +1,12 @@
 var LoginBox = React.createClass({
-
+    
     enviarPeticion: function(){
+      var user = this.campoUser.value;
       console.log(this.campoPass.value);
       fetch('/login', {
         method: 'POST',
         body: JSON.stringify({
-                user: this.campoUser.value,
+                user: user,
                 pass : this.campoPass.value
         }),
         headers: {
@@ -16,7 +17,8 @@ var LoginBox = React.createClass({
             return res.text();
           }).then(function(body) {
             if(body == "OK"){
-              window.location = "/perfil";
+               var loginMenu = document.getElementById("loginMenu");
+               loginMenu.innerHTML = "<li><a href='/perfil'>Perfil</a></li><li><a href='/logout'>Cerrar Sesión</a></li><li><a href='/images/upload'>Subir Imágenes</a></li>";
             }else{
               var msgLogin = document.getElementById("msgLogin");
               msgLogin.style = "text-align: center;background-color: #f03737cc;padding: 2px;border-radius: 5px;margin-bottom: 10px;";
@@ -33,7 +35,7 @@ var LoginBox = React.createClass({
                   <input className="loginBoxInput" ref={(campo)=>{this.campoPass=campo}} required="" type="password"></input>
                 </fieldset>
                 <fieldset id="actions">
-                  <input id="submit" onClick={this.enviarPeticion} className="loginBoxSubmit" value="Iniciar sesión" type="button"></input>
+                  <button id="submit" onClick={this.enviarPeticion} className="loginBoxSubmit">Iniciar sesión</button>
                 </fieldset>
             </div>;
     }

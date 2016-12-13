@@ -39,15 +39,15 @@ function verBox(){
                       </div>
                       <button type="submit" class="btn btn-default">Submit</button>
                     </form>-->
-                    <ul class="nav navbar-nav navbar-right">
-                    <% if(typeof user !== 'undefined' && user !== null && user.length == 1){%>
-                          <li><a href="/perfil">Perfil</a></li>
-                          <li><a href="/logout">Cerrar Sesión</a></li>
-                    <%}else{%>
-                       <li><a style="cursor: pointer;" onClick="verBox()">Iniciar Sesión <span id="loginBoxStatus">▼</span></a>
-                           <div id="loginBox"></div>
-                       </li>
-                    <%}%>
+                    <ul class="nav navbar-nav navbar-right" id="loginMenu">
+                        <% if(typeof user !== 'undefined' && user !== null && user.length == 1){%>
+                              <li><a href="/perfil">Perfil</a></li>
+                              <li><a href="/logout">Cerrar Sesión</a></li>
+                        <%}else{%>
+                           <li><a style="cursor: pointer;" onClick="verBox()">Iniciar Sesión <span id="loginBoxStatus">▼</span></a>
+                               <div id="loginBox"></div>
+                           </li>
+                        <%}%>
                       <li><a href="/images/upload">Subir Imágenes</a></li>
                     </ul>
                   </div>

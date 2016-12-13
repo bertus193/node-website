@@ -48,7 +48,7 @@ app.get('/perfil', function(pet, resp) {
 						resp.render('../views/profile.ejs', {user})
 				}
 				else {
-    				resp.redirect("/login?msg=3")
+    				resp.redirect("/404")
     		}
 		});
 
