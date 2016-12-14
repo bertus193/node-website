@@ -12,12 +12,16 @@
    <script type="text/babel" src="/js/loginBox.js"></script>
    <script>
    function mobileMenu(){
+      var loginBox = document.getElementById('loginBox');
+      var boxStatus = document.getElementById('loginBoxStatus');
       var menu = document.getElementById('menuExpand');
       if(menu.style.height == "0px"){
          menu.style  = "";
       }
       else{
          menu.style  = "height:0px;visibility:hidden;";
+         boxStatus.innerHTML = '▼';
+         loginBox.style.visibility='hidden';
       }
    }
    function verBox(){
