@@ -4,7 +4,6 @@ img{
 
 input[type="file"]{
   display: inline;
-  width:100%;
 }
 
 .PaginationButtons{
@@ -111,11 +110,11 @@ input[type="file"]{
   #menuExpand{
     display: none;
   }
-}
-
-@media(max-width: 600px) {
-   .PaginationItem{
+  .PaginationItem{
       height: 200px;
       line-height: 170px;
    }
+  input[type="file"]{
+    width:100%;
+  }
 }
