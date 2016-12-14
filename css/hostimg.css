@@ -104,3 +104,10 @@ input[type="file"]{
 #loginBox{
   visibility:hidden;
 }
+
+@media(max-width: 600px) {
+   .PaginationItem{
+      height: 200px;
+      line-height: 170px;
+   }
+}
