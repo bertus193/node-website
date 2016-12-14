@@ -20,8 +20,7 @@ var LoginBox = React.createClass({
                loginMenu.innerHTML = "<li><a href='/perfil'>Perfil</a></li><li><a href='/logout'>Cerrar Sesión</a></li><li><a href='/images/upload'>Subir Imágenes</a></li>";
             }else{
               var msgLogin = document.getElementById("msgLogin");
-              msgLogin.style = "text-align: center;background-color: #f03737cc;padding: 2px;border-radius: 5px;margin-bottom: 10px;";
-              msgLogin.innerHTML = body;
+              msgLogin.innerHTML = "<div class='msgLoginDiv'>" + body + "</div>";
             }
           })
     },
@@ -30,8 +29,8 @@ var LoginBox = React.createClass({
         return <div id="login-content">
                <div id="msgLogin"></div>
                 <fieldset id="inputs">
-                  <input className="loginBoxInput" ref={(campo)=>{this.campoUser=campo}} placeholder="Tu usuario" required=""></input>   
-                  <input className="loginBoxInput" ref={(campo)=>{this.campoPass=campo}} required="" type="password"></input>
+                  <input className="loginBoxInput" ref={(campo)=>{this.campoUser=campo}} placeholder="Usuario" required=""></input>   
+                  <input className="loginBoxInput" ref={(campo)=>{this.campoPass=campo}} placeholder="Contraseña" required="" type="password"></input>
                 </fieldset>
                 <fieldset id="actions">
                   <button id="submit" onClick={this.enviarPeticion} className="loginBoxSubmit">Iniciar sesión</button>

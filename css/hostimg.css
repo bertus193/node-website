@@ -4,6 +4,7 @@ img{
 
 input[type="file"]{
   display: inline;
+  width:100%;
 }
 
 .PaginationButtons{
@@ -19,7 +20,7 @@ input[type="file"]{
 }
 
 .PaginationImg{
-      max-height: 280px;
+      max-height: 100%;
 }
 
 .columnLeft{
@@ -62,14 +63,7 @@ input[type="file"]{
   position: absolute;
   top: 55px;
   right: 0;
-  z-index: 999;
   background: #fff;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
-  background-image: -webkit-linear-gradient(top, #fff, #eee);
-  background-image: -moz-linear-gradient(top, #fff, #eee);
-  background-image: -ms-linear-gradient(top, #fff, #eee);
-  background-image: -o-linear-gradient(top, #fff, #eee);
-  background-image: linear-gradient(top, #fff, #eee);
   padding: 15px;
   -moz-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
   -webkit-box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
@@ -105,26 +99,18 @@ input[type="file"]{
   visibility:hidden;
 }
 
+.msgLoginDiv{
+  text-align: center;
+  background-color: #f03737cc;
+  padding: 2px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
 @media(max-width: 768px) {
   #menuExpand{
     display: none;
   }
-#fbCheck {
-    display:none;
-}
-
-
-#fbCheck:not(:checked) ~ .sidebar-follow-button
-{
-    display:none;
-}
-
-
-
-#fbCheck:checked ~ .sidebar-follow-button
-{
-    display:block;
-}
 }
 
 @media(max-width: 600px) {
