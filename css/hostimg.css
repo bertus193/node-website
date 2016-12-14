@@ -105,6 +105,28 @@ input[type="file"]{
   visibility:hidden;
 }
 
+@media(max-width: 768px) {
+  #menuExpand{
+    display: none;
+  }
+#fbCheck {
+    display:none;
+}
+
+
+#fbCheck:not(:checked) ~ .sidebar-follow-button
+{
+    display:none;
+}
+
+
+
+#fbCheck:checked ~ .sidebar-follow-button
+{
+    display:block;
+}
+}
+
 @media(max-width: 600px) {
    .PaginationItem{
       height: 200px;

@@ -3,9 +3,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="/lib/bootstrap.min.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/hostimg.css">
+   <link rel="stylesheet" href="/css/hostimg.css">
    <meta charset="utf-8">
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/1.1.0/bootstrap-native.min.js"></script>
    <script src="https://unpkg.com/react@15/dist/react.js"></script>
    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
@@ -15,11 +14,11 @@
       var loginBox = document.getElementById('loginBox');
       var boxStatus = document.getElementById('loginBoxStatus');
       var menu = document.getElementById('menuExpand');
-      if(menu.style.height == "0px"){
-         menu.style  = "";
+      if(menu.style.display == "none"){
+         menu.style  = "display:block";
       }
       else{
-         menu.style  = "height:0px;visibility:hidden;";
+         menu.style  = "display:none;";
          boxStatus.innerHTML = '▼';
          loginBox.style.visibility='hidden';
       }
@@ -41,7 +40,7 @@
 <nav class="navbar navbar-default">
    <div class="container-fluid">
        <div class="navbar-header">
-         <button onClick="mobileMenu()" class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+         <button for="fbCheck" onClick="mobileMenu()" class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -50,7 +49,7 @@
          <a class="navbar-brand" href="/"><span class="fa fa-picture-o"></span> HostIMG</a>
        </div>
       
-<nav id="menuExpand">
+<nav class="sidebar-follow-button" id="menuExpand">
 				<ul class="nav navbar-nav">
            <li><a href="/">Inicio</a></li>
          </ul>
