@@ -63,26 +63,35 @@ app.get('/images/upload', function(req, res){
 })
 	
 app.post('/images/upload', multipart(), function(req, resp) {
-	var user = req.body.user;
-	var tempPath = req.files.image.path;
-	var enlace = framework.getImages().generateImageName(5);
-	var imageName = enlace + ".png";
-  var targetPath = path.resolve('./images/lib/'+imageName);
-	if(req.files.image.name === ''){
-		resp.redirect("/images/upload?msg=1");
-	}	
-  else if (path.extname(req.files.image.name).toLowerCase() === '.png') {
-        fs.rename(tempPath, targetPath, function(err) {
-            if (err) throw err;
-            framework.getImages().newImage("Nueva Imagen",user, enlace, imageName);
-						resp.redirect("/images/"+enlace+"?msg=3");
-        });
-  } 
-	else {
-        fs.unlink(tempPath, function () {
-            resp.redirect("/images/upload?msg=2");
-        });
-  }
+	var token = framework.localStorage.token;
+	framework.getAuth().validateSession(token, function(err, user){
+		if(typeof user !== 'undefined' && user !== null && user.length == 1){
+			user = user[0].username;
+		}
+		else{
+			user = "Anónimo";
+		}
+		var tempPath = req.files.image.path;
+		var enlace = framework.getImages().generateImageName(5);
+		var imageName = enlace + ".png";
+		var targetPath = path.resolve('./images/lib/'+imageName);
+
+		if(req.files.image.name === ''){
+			res.render('../views/uploadImage.ejs', {msg : 1, user})
+		}	
+		else if (req.files.image.type === 'image/png') {
+					fs.rename(tempPath, targetPath, function(err) {
+							if (err) throw err;
+							framework.getImages().newImage("Nueva Imagen",user, enlace, imageName);
+							resp.redirect("/images/"+enlace+"?msg=3");
+					});
+		} 
+		else {
+					fs.unlink(tempPath, function () {
+							res.render('../views/uploadImage.ejs', {msg : 2, user})
+					});
+		}
+	})
 })
 
 app.get('/images/:enlace', function(pet,resp){

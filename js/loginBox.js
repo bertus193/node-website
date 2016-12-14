@@ -2,7 +2,6 @@ var LoginBox = React.createClass({
     
     enviarPeticion: function(){
       var user = this.campoUser.value;
-      console.log(this.campoPass.value);
       fetch('/login', {
         method: 'POST',
         body: JSON.stringify({
@@ -41,7 +40,8 @@ var LoginBox = React.createClass({
     }
 });
 
-
+if(document.getElementById('loginBox')){
 ReactDOM.render(
     <LoginBox/>, document.getElementById('loginBox')
 );
+}

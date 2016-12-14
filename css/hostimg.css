@@ -15,6 +15,7 @@ input[type="file"]{
 
 .PaginationItem{
       height: 300px;
+      line-height: 270px;
 }
 
 .PaginationImg{
