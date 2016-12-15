@@ -10,6 +10,14 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
    <script type="text/babel" src="/js/loginBox.js"></script>
    <script>
+	window.onresize = function(event) {
+	if(screen.width >= '768'){
+		document.getElementById('menuExpand').style = "display:block";
+	}
+		else{
+			document.getElementById('menuExpand').style = "display:none";
+		}
+	}
    function mobileMenu(){
       var loginBox = document.getElementById('loginBox');
       var boxStatus = document.getElementById('loginBoxStatus');

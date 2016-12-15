@@ -106,6 +106,10 @@ input[type="file"]{
   margin-bottom: 10px;
 }
 
+#menuExpand{
+  display: block;
+}
+
 @media(max-width: 768px) {
   #menuExpand{
     display: none;
