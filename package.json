@@ -1,39 +1,35 @@
-{                                                                                                                                                                                                                                         
-  "name": "Hostimg",  
-  
-  "version": "1.0.0",     
-  
-  "description": "Alojamiento Imagenes Hostimg",         
-  
-  "main": "index.js",   
-  
-  "directories": {                                                                                     
-    "test": "test"     },                                                                                                                                                                                                                                      
+{
+  "name": "hostimg",
+  "version": "1.0.0",
+  "description": "Proyecto Node Hostimg",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
-    "body-parser": "^1.15.2",  
-    "connect-multiparty": "^2.0.0",       
-    "ejs": "^2.5.2",       
-    "express": "^4.14.0",       
-    "jwt-simple": "^0.5.0",        
-    "moment": "^2.15.1",      
-    "mysql": "^2.11.1",       
-    "express-session": "^1.14.1",           
-    "supertest": "^2.0.1",
-    "mocha": "^3.1.2",
+    "body-parser": "^1.15.2",
+    "connect-multiparty": "^2.0.0",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "jwt-simple": "^0.5.0",
     "localStorage": "^1.0.3",
- },                                                                                                                                                                                                                                      
-  "devDependencies": {},                                                                                                                                                                                                                  
-  "scripts": {                                                                                                                                                                                                                            
-    "test": "mocha"                                                                                                                                                                                                                       
-  },                                                                                                                                                                                                                                      
-  "repository": {                                                                                                                                                                                                                         
-    "type": "git",                                                                                                                                                                                                                        
-    "url": "git+https://github.com/bertus193/node-website.git"                                                                                                                                                                            
-  },                                                                                                                                                                                                                                      
-  "author": "Alberto Rico Garcia",                                                                                                                                                                                                        
-  "license": "ISC",                                                                                                                                                                                                                       
-  "bugs": {                                                                                                                                                                                                                               
-    "url": "https://github.com/bertus193/node-website/issues"                                                                                                                                                                             
-  },                                                                                                                                                                                                                                      
-  "homepage": "https://github.com/bertus193/node-website#readme"                                                                                                                                                                          
-}                 
+    "moment": "^2.15.1",
+    "mysql": "^2.11.1",
+    "supertest": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bertus193/node-website.git"
+  },
+  "author": "Alberto Rico Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bertus193/node-website/issues"
+  },
+  "homepage": "https://github.com/bertus193/node-website#readme"
+}
