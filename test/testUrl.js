@@ -7,8 +7,6 @@ var assert = require('assert');
 
 describe('Test Paths', function(){
   
-  var token;
-  
     //TEST 1
     it('Devuelve el contenido adecuado', function(done){
         supertest(app)
@@ -57,8 +55,7 @@ describe('Test Paths', function(){
     //TEST 6
     it('Editar imagen', function(done){
         supertest(app)
-            .put('/images/edit')
-            .send('id=3')
+            .put('/images/edit/6lrjg')
             .send('nombre=Test')
             .expect('Datos de la imagen modificados')
             .expect(200, done);
@@ -68,22 +65,22 @@ describe('Test Paths', function(){
     it('Perfil, token no valido', function(done){
         supertest(app)                    
             .get('/perfil')
-            .expect('Found. Redirecting to /login?msg=3', done)
+            .expect('Found. Redirecting to /404', done)
     });
   
     //TEST 8
     it('Login', function(done){
         supertest(app)                    
-            .post('/checkLogin')
+            .post('/login')
             .send('user=root')
-            .send('password=123456')
-            .expect('Found. Redirecting to /perfil',done)
+            .send('pass=123456')
+            .expect('OK',done)
     });
   
     //TEST 8-9
     it('Perfil con sesion iniciada', function(done){
         supertest(app)                    
-            .get('/perfil?token='+token)
+            .get('/perfil?')
             .expect(function(res) {
                assert(res.text.indexOf('<h3>¡Hola <strong>root</strong>!</h3>') > -1);
               })
@@ -95,8 +92,10 @@ describe('Test Paths', function(){
         supertest(app)                    
             .post('/images/upload')
             .attach('image', path.join(__dirname, 'x.jpg'))
-            .expect('Found. Redirecting to /images/upload?msg=2')
-            .expect(302, done);
+            .expect(function(res) {
+               assert(res.text.indexOf('Solo se puede utilizar el formato .png') > -1);
+              })
+            .expect(406, done);
     });
   
     

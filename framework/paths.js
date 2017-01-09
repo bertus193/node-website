@@ -77,18 +77,20 @@ app.post('/images/upload', multipart(), function(req, resp) {
 		var targetPath = path.resolve('./images/lib/'+imageName);
 
 		if(req.files.image.name === ''){
-			res.render('../views/uploadImage.ejs', {msg : 1, user})
+			resp.render('../views/uploadImage.ejs', {msg : 1, user})
 		}	
 		else if (req.files.image.type === 'image/png') {
 					fs.rename(tempPath, targetPath, function(err) {
 							if (err) throw err;
 							framework.getImages().newImage("Nueva Imagen",user, enlace, imageName);
 							resp.redirect("/images/"+enlace+"?msg=3");
+							
 					});
 		} 
 		else {
 					fs.unlink(tempPath, function () {
-							res.render('../views/uploadImage.ejs', {msg : 2, user})
+							resp.status(406);
+							resp.render('../views/uploadImage.ejs', {msg : 2, user})
 					});
 		}
 	})
