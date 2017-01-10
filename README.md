@@ -5,10 +5,11 @@
 
  1. [CONFIGURACIÓN.](#1-configuraci%C3%B3n)
  2. [Framework.](#2-framework)
- 2. [Historias de Usuario.](#3-historias-de-usuario)
- 3. [Ejemplos de CRUD.](#4-ejemplos-de-crud)
- 4. [Paginación.](#5-paginaci%C3%B3n)
- 5. [Comandos utilizados.](#6-comandos-e-informaci%C3%B3n-%C3%BAtil)
+ 3. [Historias de Usuario.](#3-historias-de-usuario)
+ 4. [Ejemplos de CRUD.](#4-ejemplos-de-crud)
+ 5. [Paginación.](#5-paginaci%C3%B3n)
+ 6. [Diseño Adaptativo.](#6-diseño-adaptativo)
+ 7. [Comandos utilizados.](#7-comandos-e-informaci%C3%B3n-%C3%BAtil)
 
 
 ----------
@@ -88,7 +89,14 @@ Para eliminar una imagen se usará /images/delete/:enlace (DELETE)
 
 Para paginación se usará la url origen '/' el cuál mostrará todas las imagenes subidas.
 
-## 6. Comandos e información útil
+## 6. Diseño Adaptativo.
+
+>Vista desde móvil:
+
+>![Móvil](http://hostimg-albertoricogarcia1993162828.codeanyapp.com:3000/lib/mobile.png)
+
+
+## 7. Comandos e información útil
 
 - killall -9 node
 - mysql -u root
@@ -97,6 +105,3 @@ Para paginación se usará la url origen '/' el cuál mostrará todas las imagen
 - npm install x
 - Tests: mocha
 - [Editor Markdown](https://stackedit.io/editor)
-
-
-
