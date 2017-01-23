@@ -93,7 +93,7 @@ Para paginación se usará la url origen '/' el cuál mostrará todas las imagen
 
 >Vista desde móvil:
 
->![Móvil](http://hostimg-albertoricogarcia1993162828.codeanyapp.com:3000/lib/mobile.png)
+>![Móvil](https://raw.githubusercontent.com/bertus193/node-website/master/lib/mobile.png?token=AVLzEYAOYIxquV2IKuL6HPgVqyxTMOuPks5Yj47gwA%3D%3D)
 
 
 ## 7. Comandos e información útil
